@@ -18,8 +18,3 @@ def root():
 @app.get("/health")
 def health():
     return {"status": "ok", "app": "Crystaldive Global"}
-
-
-
-First line: from fastapi import FastAPI
-Last line: return {"status": "ok", "app": "Crystaldive Global"}
