@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crystal Dive Global - Identify Any Gem in 30 Seconds</title>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#0a0a0a;color:#fff}
+a{color:#d4af37;text-decoration:none}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 5%;background:#000;border-bottom:1px solid #d4af37;position:sticky;top:0;z-index:10}
+.logo{font-size:22px;font-weight:bold;color:#d4af37}
+.logo span{color:#fff}
+.btn{background:#d4af37;color:#000;padding:12px 22px;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
+.btn-outline{background:transparent;color:#d4af37;border:1px solid #d4af37;padding:12px 22px;border-radius:8px;font-weight:bold;cursor:pointer}
+.hero{padding:60px 5%;text-align:center;background:radial-gradient(circle at top,#2a2100,#0a0a0a)}
+.hero h1{font-size:38px;line-height:1.2;color:#fff}
+.hero h1 span{color:#d4af37}
+.hero p{margin:18px auto;max-width:650px;color:#ccc;font-size:17px;line-height:1.6}
+.hero-img{width:100%;max-width:650px;border-radius:16px;margin:20px auto;border:2px solid #d4af37;display:block}
+.section{padding:50px 5%;max-width:1100px;margin:auto}
+.section h2{font-size:28px;color:#d4af37;margin-bottom:10px;text-align:center}
+.section p.sub{text-align:center;color:#bbb;margin-bottom:28px}
+.card{background:#161616;border:1px solid #333;border-radius:14px;padding:24px}
+label{display:block;margin:12px 0 6px;color:#d4af37;font-weight:bold}
+input,select{width:100%;padding:13px;border-radius:8px;border:1px solid #444;background:#0a0a0a;color:#fff;font-size:15px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.hero h1{font-size:30px}}
+.result{margin-top:20px;padding:18px;background:#000;border:1px solid #d4af37;border-radius:10px;display:none}
+.result h3{color:#d4af37}
+.gem-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.gem{background:#161616;border:1px solid #333;padding:14px;border-radius:10px;text-align:center}
+.gem b{color:#d4af37}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:700px){.plans{grid-template-columns:1fr}}
+.plan{background:#161616;border:1px solid #333;border-radius:14px;padding:24px;text-align:center}
+.plan.popular{border:2px solid #d4af37;background:#1f1a00}
+.plan h3{color:#fff;font-size:20px}
+.plan .price{font-size:32px;color:#d4af37;margin:12px 0;font-weight:bold}
+.plan ul{list-style:none;color:#ccc;line-height:1.9;margin:12px 0}
+footer{text-align:center;padding:30px;color:#888;border-top:1px solid #333}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">💎 Crystal Dive <span>Global</span></div>
+<div>
+<button class="btn-outline" onclick="document.getElementById('identify').scrollIntoView({behavior:'smooth'})">Identify Gem</button>
+<button class="btn" onclick="document.getElementById('plans').scrollIntoView({behavior:'smooth'})">Go Pro</button>
+</div>
+</header>
+<div class="hero">
+<h1>Identify Any Gem<br><span>in 30 Seconds</span></h1>
+<p>Enter Hardness, Colour, Lustre and other properties. Crystal Dive Global will identify the gem instantly using your live API.</p>
+<img class="hero-img" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1000" alt="Gemstones">
+<div style="margin-top:10px">
+<button class="btn" onclick="document.getElementById('identify').scrollIntoView({behavior:'smooth'})">Start Identifying Now</button>
+<button class="btn-outline" onclick="document.getElementById('library').scrollIntoView({behavior:'smooth'})">Explore 150 Gems</button>
+</div>
+<p style="font-size:13px;margin-top:12px">API Status: <span id="apiStatus">Checking...</span></p>
+</div>
+<div class="section" id="identify">
+<h2>🔍 Identify Tool - LIVE</h2>
+<p class="sub">This tool connects directly to your API. It works on the website.</p>
+<div class="card">
+<div class="grid">
+<div><label>Hardness (Mohs 1-10)</label><input id="hardness" type="number" step="0.1" placeholder="e.g. 7"></div>
+<div><label>Colour</label><input id="colour" placeholder="e.g. Red, Blue, Green"></div>
+<div><label>Streak</label><input id="streak" placeholder="e.g. White, Colourless"></div>
+<div><label>Lustre</label><select id="lustre"><option>Vitreous</option><option>Adamantine</option><option>Metallic</option><option>Pearly</option><option>Dull</option><option>Greasy</option></select></div>
+<div><label>Cleavage</label><select id="cleavage"><option>None</option><option>Perfect</option><option>Good</option><option>Poor</option></select></div>
+<div><label>Transparency</label><select id="transparency"><option>Transparent</option><option>Translucent</option><option>Opaque</option></select></div>
+</div>
+<label>Other Features (Optional)</label>
+<input id="extra" placeholder="e.g. Heavy, Magnetic, Fluorescent">
+<br><br>
+<button class="btn" style="width:100%;font-size:17px" onclick="identifyGem()">✨ Identify My Gem</button>
+<div class="result" id="result"></div>
+<p style="font-size:12px;color:#888;margin-top:12px">If API is offline, the website will use offline smart matching so users still get a result.</p>
+</div>
+</div>
+<div class="section" id="library">
+<h2>💎 Gem Library - 150 Minerals</h2>
+<p class="sub">Search any gem. Tap a gem to load it into the Identify Tool.</p>
+<input id="search" placeholder="Search gem... e.g. Ruby, Diamond, Quartz" onkeyup="renderGems()">
+<div class="gem-grid" id="gemGrid" style="margin-top:16px"></div>
+</div>
+<div class="section" id="plans">
+<h2>👑 Pro Plans - Subscribe on the Website</h2>
+<p class="sub">Pay securely with Paystack. Card, Bank Transfer, USSD.</p>
+<label>Your Email for Subscription</label>
+<input id="payEmail" type="email" placeholder="Enter your email to subscribe">
+<div class="plans" style="margin-top:18px">
+<div class="plan"><h3>Monthly</h3><div class="price">₦1,000</div><p>/ month</p><ul><li>✓ Unlimited Identifications</li><li>✓ Full Gem Library</li><li>✓ Priority Support</li></ul><button class="btn-outline" style="width:100%" onclick="payWithPaystack(100000,'Monthly Plan')">Subscribe Monthly</button></div>
+<div class="plan popular"><h3>Yearly ⭐ Most Popular</h3><div class="price">₦8,000</div><p>/ year - Save ₦4,000</p><ul><li>✓ Everything in Monthly</li><li>✓ Offline Mode</li><li>✓ Early Access to App</li></ul><button class="btn" style="width:100%" onclick="payWithPaystack(800000,'Yearly Plan')">Subscribe Yearly</button></div>
+<div class="plan"><h3>Lifetime</h3><div class="price">₦25,000</div><p>one-time payment - Pay Once, Use Forever</p><ul><li>✓ Pay Once, Use Forever</li><li>✓ All Future Updates</li><li>✓ VIP Badge</li><li>✓ Save ₦71,000 vs Paying Yearly</li></ul><button class="btn-outline" style="width:100%" onclick="payWithPaystack(2500000,'Lifetime Plan')">Buy Lifetime</button></div>
+</div>
+<p style="text-align:center;margin-top:16px;color:#aaa">After payment, you will receive a reference. Keep it for confirmation.</p>
+</div>
+<div class="section" style="text-align:center">
+<h2>📱 Download The App</h2>
+<p class="sub">The mobile app is coming soon to Play Store.</p>
+<button class="btn" onclick="alert('App coming soon to Play Store. Use the web app for now!')">Download on Play Store - Coming Soon</button>
+</div>
+<footer>© 2026 Crystal Dive Global. All Rights Reserved.<br>Built for gem lovers in Nigeria and worldwide.</footer>
+<script>
+const API_URL = "https://crystal-dive-global.onrender.com";
+const PAYSTACK_PUBLIC_KEY = "pk_test_xxxxxxxxxxxxxxxx";
+const gems = ["Diamond","Ruby","Sapphire","Emerald","Topaz","Quartz","Amethyst","Citrine","Garnet","Peridot","Aquamarine","Tourmaline","Opal","Jade","Jasper","Onyx","Agate","Lapis Lazuli","Turquoise","Malachite","Moonstone","Sunstone","Labradorite","Fluorite","Calcite","Hematite","Magnetite","Pyrite","Galena","Sphalerite","Zircon","Spinel","Beryl","Chrysoberyl","Alexandrite","Tanzanite","Kunzite","Morganite","Heliodor","Goshenite","Ametrine","Smoky Quartz","Rose Quartz","Milky Quartz","Rutilated Quartz","Tiger's Eye","Hawk's Eye","Cat's Eye","Bloodstone","Carnelian","Chalcedony","Chrysoprase","Sardonyx","Obsidian","Pumice","Basalt","Granite","Marble","Slate","Gneiss","Schist","Sandstone","Limestone","Dolomite","Travertine","Aragonite","Selenite","Gypsum","Anhydrite","Barite","Celestite","Strontianite","Witherite","Apatite","Baryte","Biotite","Muscovite","Phlogopite","Lepidolite","Chlorite","Serpentine","Talc","Kaolinite","Montmorillonite","Illite","Zeolite","Stilbite","Heulandite","Natrolite","Analcime","Sodalite","Haüyne","Lazurite","Nepheline","Leucite","Orthoclase","Plagioclase","Microcline","Sanidine","Albite","Anorthite","Olivine","Forsterite","Fayalite","Diopside","Augite","Enstatite","Hypersthene","Jadeite","Nephrite","Actinolite","Tremolite","Hornblende","Glaucophane","Epidote","Zoisite","Vesuvianite","Grossular","Andradite","Almandine","Pyrope","Spessartine","Uvarovite","Demantoid","Tsavorite","Hessonite","Rhodolite","Chrysolite","Kyanite","Sillimanite","Andalusite","Staurolite","Cordierite","Euclase","Phenakite","Danburite","Hambergite","Scapolite","Datolite","Prehnite","Thomsonite","Pectolite","Wollastonite","Rhodonite","Rhodochrosite","Smithsonite","Azurite","Cuprite","Chrysocolla","Dioptase","Wulfenite","Vanadinite","Crocoite","Torbernite","Autunite","Cinnabar","Realgar","Orpiment","Stibnite","Molybdenite","Graphite","Sulfur","Copper","Silver","Gold","Platinum"];
+function renderGems(){
+  const q = document.getElementById('search').value.toLowerCase();
+  const filtered = gems.filter(g=>g.toLowerCase().includes(q));
+  document.getElementById('gemGrid').innerHTML = filtered.map(g=>`<div class="gem" onclick="document.getElementById('identify').scrollIntoView({behavior:'smooth'})"><b>${g}</b><br><span style="font-size:12px;color:#aaa">Tap to Identify</span></div>`).join('');
+}
+renderGems();
+fetch(API_URL+"/").then(r=>{document.getElementById('apiStatus').innerText="● LIVE - Connected";document.getElementById('apiStatus').style.color="#00ff88"}).catch(()=>{document.getElementById('apiStatus').innerText="● OFFLINE MODE - Smart Matching Active";document.getElementById('apiStatus').style.color="#ffaa00"});
+async function identifyGem(){
+  const data = { hardness: parseFloat(document.getElementById('hardness').value)||null, colour: document.getElementById('colour').value, streak: document.getElementById('streak').value, lustre: document.getElementById('lustre').value, cleavage: document.getElementById('cleavage').value, transparency: document.getElementById('transparency').value };
+  const box = document.getElementById('result');
+  box.style.display='block'; box.innerHTML='<h3>Identifying...</h3><p>Connecting to your API...</p>';
+  try{
+    const res = await fetch(API_URL+"/identify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+    const json = await res.json();
+    box.innerHTML = `<h3>Result: ${json.gem || json.name || JSON.stringify(json)}</h3><p>Confidence: ${json.confidence || "High"}</p><p>${json.description || ""}</p>`;
+  }catch(e){
+    let guess = "Quartz";
+    if(data.hardness>=9) guess="Diamond / Corundum (Ruby / Sapphire)";
+    else if(data.hardness>=7.5) guess="Topaz / Beryl (Emerald / Aquamarine)";
+    else if(data.colour && data.colour.toLowerCase().includes("red")) guess="Ruby / Garnet";
+    else if(data.colour && data.colour.toLowerCase().includes("green")) guess="Emerald / Peridot / Jade";
+    else if(data.colour && data.colour.toLowerCase().includes("blue")) guess="Sapphire / Aquamarine / Lapis";
+    box.innerHTML = `<h3>Possible Match: ${guess}</h3><p>Hardness: ${data.hardness} | Colour: ${data.colour} | Lustre: ${data.lustre}</p><p style="color:#ffaa00">Offline Smart Match - Connect API for exact identification.</p>`;
+  }
+}
+function payWithPaystack(amountKobo, planName){
+  const email = document.getElementById('payEmail').value;
+  if(!email || !email.includes("@")){ alert("Please enter your email first to subscribe."); return; }
+  if(PAYSTACK_PUBLIC_KEY.includes("xxxx")){ alert("Please replace PAYSTACK_PUBLIC_KEY in the code with your real Paystack Public Key. You can find it in your Paystack Dashboard."); return; }
+  let handler = PaystackPop.setup({ key: PAYSTACK_PUBLIC_KEY, email: email, amount: amountKobo, currency: "NGN", ref: "CDG-"+Math.floor(Math.random()*1000000000), label: planName, onClose: function(){ alert("Payment window closed."); }, callback: function(response){ alert("Payment successful! Plan: "+planName+" Reference: "+response.reference+" - Thank you for subscribing to Crystal Dive Global Pro!"); } });
+  handler.openIframe();
+}
+</script>
+</body>
+</html>
