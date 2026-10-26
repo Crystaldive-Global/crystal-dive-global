@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Scan Mineral - Crystal Dive Global</title>
+<style>body{background:#0a0a0a;color:#fff;font-family:Arial;text-align:center;padding:20px}h1{color:#d4af37}.box{background:#1a1a1a;padding:20px;border-radius:15px;border:1px solid #d4af37}button{background:#d4af37;color:#000;border:none;padding:14px 20px;border-radius:10px;font-weight:bold;font-size:16px;width:100%;margin-top:10px}input,select{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:none}img{max-width:100%;border-radius:12px;margin-top:10px;border:2px solid #d4af37}#result{background:#222;padding:15px;border-radius:10px;margin-top:15px;text-align:left}</style></head>
+<body>
+<a href="index.html" style="color:#d4af37">← Back to Home</a>
+<h1>📸 Scan Mineral</h1>
+<p>Take a photo, then add hardness to get a better ID.</p>
+<div class="box">
+<input type="file" id="photo" accept="image/*" capture="environment">
+<img id="preview" style="display:none">
+<select id="color"><option value="">Select Main Colour</option><option>Red</option><option>Blue</option><option>Green</option><option>Purple</option><option>Yellow</option><option>White / Clear</option><option>Black</option><option>Pink</option><option>Orange</option><option>Brown</option></select>
+<input id="hardness" type="number" placeholder="Hardness (1-10) e.g. 7">
+<button onclick="identify()">🔍 Identify From Photo</button>
+<div id="result">Result will appear here...</div>
+</div>
+<script>
+document.getElementById('photo').addEventListener('change',e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader(); r.onload=ev=>{
+    const img=document.getElementById('preview'); img.src=ev.target.result; img.style.display='block';
+  }; r.readAsDataURL(f);
+});
+function identify(){
+  const c=document.getElementById('color').value;
+  const h=parseFloat(document.getElementById('hardness').value);
+  const hasPhoto=document.getElementById('preview').src.length>10;
+  if(!hasPhoto){document.getElementById('result').innerHTML='⚠️ Please take a photo first.';return;}
+  if(!c){document.getElementById('result').innerHTML='⚠️ Please select colour.';return;}
+  let guess='Quartz - Most common';
+  if(c==='Red' && h>=9) guess='Ruby (Hardness 9, Red) - Very likely!';
+  else if(c==='Red' && h>=7) guess='Garnet or Red Jasper';
+  else if(c==='Blue' && h>=9) guess='Sapphire (Hardness 9, Blue)';
+  else if(c==='Blue') guess='Lapis Lazuli / Aquamarine / Turquoise';
+  else if(c==='Green' && h>=7.5) guess='Emerald / Green Tourmaline';
+  else if(c==='Green') guess='Jade / Malachite / Peridot';
+  else if(c==='Purple') guess='Amethyst (Purple Quartz)';
+  else if(c==='Yellow') guess='Citrine / Topaz / Amber';
+  else if(c==='White / Clear' && h>=9) guess='Diamond / White Sapphire';
+  else if(c==='White / Clear') guess='Clear Quartz / Selenite';
+  else if(c==='Black') guess='Obsidian / Black Tourmaline / Onyx';
+  else if(c==='Pink') guess='Rose Quartz / Pink Tourmaline';
+  document.getElementById('result').innerHTML='<b>📸 Visual Scan Result:</b><br><br><b>'+guess+'</b><br><br>Colour: '+c+'<br>Hardness: '+(h||'Not entered')+'<br><br>⚠️ Visual ID is a guide only. Confirm with Hardness + Streak test for 100% accuracy.';
+}
+</script></body></html>
