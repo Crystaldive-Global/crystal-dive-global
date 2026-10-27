@@ -62,6 +62,56 @@ footer{text-align:center;padding:30px;color:#888;border-top:1px solid #333}
 
 <p style="color:#888;font-size:13px;">Buyers get verified tested stones only. Sellers get connected to real buyers. No fake stones.</p>
 </div>  
+    <!-- SG CALCULATOR + VIDEO VERIFICATION -->
+<div style="background:#0a1a2a;border:2px solid #00e5ff;border-radius:15px;padding:20px;margin:20px;text-align:center;">
+<h2 style="color:#00e5ff;">⚖️ SG Test Calculator - Test Yourself</h2>
+<p style="color:#fff;">Step 1: Weigh stone in AIR<br>Step 2: Weigh stone in WATER (hang with thread, don't touch cup)</p>
+
+<label style="color:#fff;">Weight in AIR (g):</label><br>
+<input id="air" type="number" step="0.01" placeholder="Example: 10.00" style="padding:12px;width:90%;border-radius:8px;margin:5px 0;"><br>
+
+<label style="color:#fff;">Weight in WATER (g):</label><br>
+<input id="water" type="number" step="0.01" placeholder="Example: 7.20" style="padding:12px;width:90%;border-radius:8px;margin:5px 0;"><br>
+
+<button onclick="calcSG()" style="background:#00e5ff;color:#000;padding:15px 25px;border:none;border-radius:10px;font-weight:bold;margin:10px 0;width:100%;">CALCULATE SG NOW</button>
+
+<p id="sgResult" style="color:#FFD700;font-size:18px;font-weight:bold;"></p>
+<p id="sgGuess" style="color:#fff;"></p>
+
+<p style="color:#FFD700;font-size:14px;">⚠️ SG number alone is NOT enough. You MUST send video proof!</p>
+
+<p style="color:#fff;text-align:left;font-size:14px;">
+<b>🎥 VIDEO MUST SHOW:</b><br>
+1. Stone on scale - show Weight in AIR clearly<br>
+2. Cup of water on scale - press TARE to 0.00<br>
+3. Stone hanging in water with thread - show Weight in WATER<br>
+4. Your face + stone together at end
+</p>
+
+<a id="sendVideoBtn" href="https://wa.me/2348037537531?text=Hello%20I%20did%20SG%20Test" style="display:block;background:#25D366;color:#fff;padding:15px;border-radius:10px;font-weight:bold;text-decoration:none;margin:10px 0;">📩 SEND SG TEST VIDEO TO EXPERT FOR VERIFICATION</a>
+
+<p style="color:#888;font-size:12px;">No video = No verification = No buyer connection. Fake videos will be rejected.</p>
+</div>
+
+<script>
+function calcSG(){
+var a = parseFloat(document.getElementById('air').value);
+var w = parseFloat(document.getElementById('water').value);
+if(!a || !w || a<=w){document.getElementById('sgResult').innerText="Enter correct weights! Air must be bigger than Water";return;}
+var sg = a/(a-w);
+sg = sg.toFixed(2);
+var guess = "";
+if(sg>=3.00 && sg<=3.25) guess="Likely TOURMALINE ✅";
+else if(sg>=3.95 && sg<=4.10) guess="Likely SAPPHIRE / RUBY ✅";
+else if(sg>=2.65 && sg<=2.80) guess="Likely AQUAMARINE / EMERALD / QUARTZ - Check colour";
+else if(sg>=3.50 && sg<=3.65) guess="Likely TOPAZ / GARNET ✅";
+else if(sg>=2.45 && sg<=2.55) guess="⚠️ Likely GLASS / FAKE - SG 2.50";
+else guess="Unknown - Send video to Expert";
+document.getElementById('sgResult').innerText="Your SG = " + sg;
+document.getElementById('sgGuess').innerText=guess;
+document.getElementById('sendVideoBtn').href="https://wa.me/2348037537531?text="+encodeURIComponent("Hello Crystal Dive Global, I did SG Test. Weight in AIR: "+a+"g, Weight in WATER: "+w+"g, My SG = "+sg+" - "+guess+". Here is my VIDEO proof:");
+}
+</script>
 <!-- 4. EXPERT - PAYSTACK -->
 <div class='box'>
 <h2>4. Ask Expert - Pay Before Test</h2>
