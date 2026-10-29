@@ -43,7 +43,7 @@ footer{text-align:center;padding:30px;color:#888;border-top:1px solid #333}
 </head>
 <body>
 
-<!-- FLOATING WHATSAPP - NOW LOCKED - PAYMENT FIRST -->
+<!-- FLOATING WHATSAPP - LOCKED + EXPIRY -->
 <button class="float-wa" onclick="checkWhatsApp('general')">💬 WhatsApp Us 🔒</button>
 
 <center>
@@ -79,12 +79,12 @@ footer{text-align:center;padding:30px;color:#888;border-top:1px solid #333}
 <p style="font-size:13px;margin-top:12px">API Status: <span id="apiStatus">Checking...</span></p>
 </div>
 
-<!-- ROUGH BUYERS - NOW LOCKED -->
+<!-- ROUGH BUYERS - LOCKED -->
 <div style="background:#161616;border:2px solid #d4af37;border-radius:15px;padding:20px;margin:20px;text-align:center;">
 <h2 style="color:#d4af37;">💎 Rough Gem Buyers & Sellers - Connect Here</h2>
 <p style="color:#fff;">Are you a BUYER looking for Nigerian Rough Tourmaline, Sapphire, Aquamarine?</p>
 <p style="color:#bbb;">Are you a MINER / SELLER with Rough Gems to sell?</p>
-<p style="color:#FFD700;font-size:13px;">🔒 Pay $2 Visual Check first to unlock WhatsApp connection. No Payment = No Connection.</p>
+<p style="color:#FFD700;font-size:13px;">🔒 Pay $2 Visual Check first to unlock WhatsApp connection. 1 Payment = 1 Stone / 24 Hours Only.</p>
 <a href="javascript:void(0)" onclick="checkWhatsApp('buyer')" style="display:block;background:#25D366;color:#fff;padding:15px;border-radius:10px;font-weight:bold;text-decoration:none;margin:10px 0;">🟢 I AM A BUYER - Chat On WhatsApp 🔒</a>
 <a href="javascript:void(0)" onclick="checkWhatsApp('seller')" style="display:block;background:#d4af37;color:#000;padding:15px;border-radius:10px;font-weight:bold;text-decoration:none;margin:10px 0;">🟡 I AM A SELLER - Submit My Rough Gems 🔒</a>
 <p style="color:#888;font-size:13px;">Buyers get verified tested stones only. Sellers get connected to real buyers. No fake stones.</p>
@@ -148,21 +148,20 @@ document.getElementById('sgResult').innerText="Your SG = "+sg; document.getEleme
 <div class="gem-grid" id="gemGrid" style="margin-top:16px"></div>
 </div>
 
-<!-- PRICING - ALL CORRECT -->
+<!-- PRICING -->
 <div class="section" id="plans">
 <h2>💎 CHOOSE YOUR PLAN - Same Price Worldwide</h2>
 <p class="sub">Pay with Paystack - After payment, send receipt on WhatsApp. <b>NO RECEIPT = NO REPLY</b><br>🌍 Pay in your local currency - Your card will convert automatically. India, Kenya, Ghana, UAE, USA, UK all accepted.</p>
 <div style="display:flex;gap:15px;flex-wrap:wrap;justify-content:center;">
-<div style="flex:1;min-width:200px;padding:20px;background:#fff;border-radius:12px;color:#111;text-align:center;"><h3>🔍 VISUAL EXAMINATION</h3><h2 style="color:#111;">$2</h2><p style="color:#666;">₦3,000 One-time</p><p>✅ Physical Properties<br>✅ Visual Check Only<br>❌ No Certificate</p><a href="https://paystack.shop/pay/0m6afr2ypn" style="display:block;background:#111;color:#fff;padding:12px;border-radius:10px;text-decoration:none;font-weight:bold;">PAY $2 - VISUAL</a></div>
-<div style="flex:1;min-width:200px;padding:20px;background:#fff;border-radius:12px;color:#111;text-align:center;"><h3>📄 VERIFICATION REPORT</h3><h2 style="color:#111;">$5</h2><p style="color:#666;">₦7,500 One-time</p><p>✅ Official SG Certificate<br>✅ QR Code Verification<br>✅ Full PDF Report</p><a href="https://paystack.shop/pay/9nsq4-li8a" style="display:block;background:#111;color:#fff;padding:12px;border-radius:10px;text-decoration:none;font-weight:bold;">PAY $5 - CERTIFICATE</a></div>
-<div style="flex:1;min-width:200px;padding:20px;background:#fff;border-radius:12px;color:#111;text-align:center;"><h3>PRO MONTHLY</h3><h2 style="color:#111;">$15 / month</h2><p style="color:#666;">₦22,500 / month</p><p>✅ 5 Certificates / month<br>✅ WhatsApp Priority<br>❌ Renew every month</p><a href="https://paystack.shop/pay/jcuqqei7pj" style="display:block;background:#111;color:#fff;padding:12px;border-radius:10px;text-decoration:none;font-weight:bold;">PAY $15 / MONTH</a></div>
-<div style="flex:1;min-width:220px;padding:20px;background:#FFD700;border:2px solid #111;border-radius:12px;color:#111;text-align:center;"><h3>👑 PRO LIFETIME ⭐ BEST</h3><h2 style="color:#111;">$99 ONE TIME</h2><p><s style="color:red;">$149</s> <b style="color:green;">SAVE $50 - LAUNCH</b></p><p>₦148,500 One-time - Only 20 Slots</p><p>✅ Unlimited Certificates FOREVER<br>✅ VIP WhatsApp - 1 Hour<br>✅ Dealer Name On Certificate<br>✅ Pay Once, Never Again</p><a href="https://paystack.shop/pay/37ydyp1h3d" style="display:block;background:#111;color:#FFD700;padding:12px;border-radius:10px;text-decoration:none;font-weight:bold;">👑 PAY $99 - LIFETIME</a><p style="font-size:12px;margin-top:8px;">After 20 people, price goes to $149 / ₦223,500</p></div>
+<div style="flex:1;min-width:200px;padding:20px;background:#fff;border-radius:12px;color:#111;text-align:center;"><h3>🔍 VISUAL EXAMINATION</h3><h2 style="color:#111;">$2</h2><p style="color:#666;">₦3,000 One-time</p><p>✅ Physical Properties<br>✅ Visual Check Only<br>❌ No Certificate<br><b>⏰ 24 Hours Access - 1 Stone Only</b></p><a href="https://paystack.shop/pay/0m6afr2ypn" style="display:block;background:#111;color:#fff;padding:12px;border-radius:10px;text-decoration:none;font-weight:bold;">PAY $2 - VISUAL</a></div>
+<div style="flex:1;min-width:200px;padding:20px;background:#fff;border-radius:12px;color:#111;text-align:center;"><h3>📄 VERIFICATION REPORT</h3><h2 style="color:#111;">$5</h2><p style="color:#666;">₦7,500 One-time</p><p>✅ Official SG Certificate<br>✅ QR Code Verification<br>✅ Full PDF Report<br><b>⏰ 24 Hours Access - 1 Stone Only</b></p><a href="https://paystack.shop/pay/9nsq4-li8a" style="display:block;background:#111;color:#fff;padding:12px;border-radius:10px;text-decoration:none;font-weight:bold;">PAY $5 - CERTIFICATE</a></div>
+<div style="flex:1;min-width:200px;padding:20px;background:#fff;border-radius:12px;color:#111;text-align:center;"><h3>PRO MONTHLY</h3><h2 style="color:#111;">$15 / month</h2><p style="color:#666;">₦22,500 / month</p><p>✅ 5 Certificates / month<br>✅ WhatsApp Priority<br>❌ Renew every month<br><b>⏰ 30 Days Access</b></p><a href="https://paystack.shop/pay/jcuqqei7pj" style="display:block;background:#111;color:#fff;padding:12px;border-radius:10px;text-decoration:none;font-weight:bold;">PAY $15 / MONTH</a></div>
+<div style="flex:1;min-width:220px;padding:20px;background:#FFD700;border:2px solid #111;border-radius:12px;color:#111;text-align:center;"><h3>👑 PRO LIFETIME ⭐ BEST</h3><h2 style="color:#111;">$99 ONE TIME</h2><p><s style="color:red;">$149</s> <b style="color:green;">SAVE $50 - LAUNCH</b></p><p>₦148,500 One-time - Only 20 Slots</p><p>✅ Unlimited Certificates FOREVER<br>✅ VIP WhatsApp - 1 Hour<br>✅ Dealer Name On Certificate<br>✅ Pay Once, Never Again<br><b>♾️ NEVER EXPIRES</b></p><a href="https://paystack.shop/pay/37ydyp1h3d" style="display:block;background:#111;color:#FFD700;padding:12px;border-radius:10px;text-decoration:none;font-weight:bold;">👑 PAY $99 - LIFETIME</a><p style="font-size:12px;margin-top:8px;">After 20 people, price goes to $149 / ₦223,500</p></div>
 </div>
 <div style="text-align:center;margin-top:20px;">
 <a href="javascript:void(0)" onclick="checkWhatsApp('receipt')" style="display:inline-block;background:#25D366;color:#fff;padding:15px 25px;border-radius:10px;font-weight:bold;text-decoration:none;">📱 CLICK HERE AFTER PAYMENT - Send Receipt on WhatsApp 🔒</a>
-<p style="color:#888;font-size:13px;margin-top:10px;">How it works: 1. Pay above 2. Click WhatsApp after payment 3. Send receipt + stone photos + Weight in Air + Weight in Water<br><b>NO RECEIPT = NO REPLY.</b></p>
+<p style="color:#888;font-size:13px;margin-top:10px;">How it works: 1. Pay above 2. Click WhatsApp after payment 3. Send receipt + stone photos + Weight in Air + Weight in Water<br><b>NO RECEIPT = NO REPLY. 1 Payment = 1 Stone. Next stone = Pay again.</b></p>
 </div>
-<!-- LEGAL DISCLAIMER -->
 <div style="max-width:900px;margin:20px auto;padding:15px;background:#FFF8E1;color:#111;border-radius:10px;font-size:13px;line-height:1.6;text-align:center;">
 <b>⚖️ LEGAL DISCLAIMER & WHAT OUR CERTIFICATE MEANS:</b><br>
 Crystal Dive Global Certificate is a <b>Fast Verification Report</b> based on Specific Gravity (SG) Test + Visual / Photo / Video Examination. It is <b>NOT</b> a GIA, IGI, GRS or laboratory certificate.<br>
@@ -198,7 +197,7 @@ We are the FAST first check before you buy/sell. For stones worth $5,000+, we re
 <p style="color:#888;font-size:12px;margin-top:12px;">Testimonials from real verified customers. Send your review after your verification to be featured.</p>
 </div>
 
-<!-- GLOBAL REGIONS - ALL WORLD -->
+<!-- GLOBAL REGIONS -->
 <div style="max-width:950px;margin:20px auto;padding:25px;background:#161616;border:2px solid #d4af37;border-radius:15px;text-align:center;">
 <h2 style="color:#d4af37;">🌍 WE COVER ALL REGIONS IN THE WORLD</h2>
 <p style="color:#bbb;">We verify gems from miners, dealers & buyers in EVERY continent. No need to ship your stone. Send photos + SG weights + video.</p>
@@ -232,6 +231,7 @@ We are the FAST first check before you buy/sell. For stones worth $5,000+, we re
 <p style="margin-top:12px;"><b>4. Do you refund?</b><br>No refund after work has started. SG calculation + photo analysis + certificate work is already done. Please send correct weights.</p>
 <p style="margin-top:12px;"><b>5. Can I pay with Opay / Bank Transfer / PayPal / USDT?</b><br>Yes. Paystack link accepts Card, Bank Transfer, USSD, Opay. For PayPal / USDT, message us on WhatsApp after you pay with Paystack, we will give you PayPal / USDT details.</p>
 <p style="margin-top:12px;"><b>6. Do I need to ship my stone?</b><br>No. Never ship. Send photos + weights + video only. 100% Online.</p>
+<p style="margin-top:12px;"><b>7. I already paid for 1 stone, can I send another stone free?</b><br>No. 1 Payment = 1 Stone. For next stone, pay again and enter NEW Transaction ID. Only $99 Lifetime is unlimited forever.</p>
 </div>
 
 <div class="section" style="text-align:center">
@@ -243,39 +243,67 @@ We are the FAST first check before you buy/sell. For stones worth $5,000+, we re
 <footer>© 2026 Crystal Dive Global. All Rights Reserved.<br>Built for gem lovers in Nigeria and worldwide.<br><span style="font-size:12px;">Crystal Dive Global is a Fast Verification Service, not a GIA laboratory. See Disclaimer above.</span></footer>
 
 <script>
-// ===== WHATSAPP LOCK - PAYMENT FIRST =====
+// ===== WHATSAPP LOCK + EXPIRY - 1 PAYMENT = 1 STONE =====
 const WA_NUMBER = "2348037537531";
 function checkWhatsApp(type){
   let paid = localStorage.getItem('crystal_paid');
+  let expiry = parseInt(localStorage.getItem('crystal_expiry') || '0');
   let savedTx = localStorage.getItem('crystal_tx') || '';
-  if(paid === 'yes' && savedTx){
-    openWA(type, savedTx);
+  let savedPlan = localStorage.getItem('crystal_plan') || '';
+  let now = Date.now();
+  // If still valid, open directly
+  if(paid === 'yes' && savedTx && expiry && now < expiry){
+    let daysLeft = Math.ceil((expiry - now)/(1000*60*60*24));
+    openWA(type, savedTx, savedPlan + " (Valid - "+daysLeft+" day(s) left)");
     return;
   }
-  let msg = "🔒 WhatsApp is for PAID customers only.\n\n";
-  if(type==='buyer') msg += "BUYER: Pay $2 Visual Check first, then enter your Transaction ID / Receipt No to unlock Buyer WhatsApp:";
-  else if(type==='seller') msg += "SELLER: Pay $2 Visual Check first, then enter your Transaction ID / Receipt No to unlock Seller WhatsApp:";
-  else if(type==='receipt') msg += "You said you have paid. Enter your Transaction ID / Receipt No from Paystack to unlock WhatsApp and send receipt:";
-  else msg += "Pay $2 / $5 / $99 first on the Pricing section, then enter your Transaction ID / Receipt No here to unlock WhatsApp:";
-  let tx = prompt(msg);
-  if(!tx){ return; }
-  tx = tx.trim();
-  if(tx.length < 4){
-    alert("❌ Invalid ID. Too short. Please pay first on Pricing section, then enter correct Transaction ID.");
+  // If expired, clear and tell them
+  if(paid === 'yes' && expiry && now >= expiry){
+    localStorage.removeItem('crystal_paid');
+    localStorage.removeItem('crystal_tx');
+    localStorage.removeItem('crystal_expiry');
+    localStorage.removeItem('crystal_plan');
+    alert("⏰ Your access EXPIRED. Your 1 service is done.\n\nFor your NEXT stone, please pay AGAIN and enter your NEW Transaction ID.\n\n1 Payment = 1 Stone. Only $99 Lifetime is unlimited.");
     document.getElementById('plans').scrollIntoView({behavior:'smooth'});
     return;
   }
+  // Ask for Transaction ID
+  let msg = "🔒 WhatsApp is for PAID customers only.\n\n";
+  if(type==='buyer') msg += "BUYER: Pay $2 first, then enter Transaction ID:";
+  else if(type==='seller') msg += "SELLER: Pay $2 first, then enter Transaction ID:";
+  else if(type==='receipt') msg += "You said you have paid. Enter Transaction ID from Paystack:";
+  else msg += "Pay $2 / $5 / $99 first on Pricing, then enter Transaction ID:";
+  let tx = prompt(msg);
+  if(!tx) return;
+  tx = tx.trim();
+  if(tx.length < 4){
+    alert("❌ Invalid ID. Too short. Please pay first, then enter correct Transaction ID.");
+    document.getElementById('plans').scrollIntoView({behavior:'smooth'});
+    return;
+  }
+  // Ask which plan they paid for
+  let plan = prompt("Which plan did you pay for? Type number:\n\n1 = $2 / $5 - ONE STONE - 24 Hours Access\n2 = $15 Monthly - 5 Certs - 30 Days Access\n3 = $99 Lifetime - UNLIMITED - Forever\n\nType 1, 2 or 3:");
+  if(!plan) return;
+  plan = plan.trim();
+  let expiryTime = 0;
+  let planName = "";
+  if(plan === '1'){ expiryTime = now + (24*60*60*1000); planName = "$2/$5 Single - 24H"; }
+  else if(plan === '2'){ expiryTime = now + (30*24*60*60*1000); planName = "$15 Monthly - 30 Days"; }
+  else if(plan === '3'){ expiryTime = now + (100*365*24*60*60*1000); planName = "$99 Lifetime - FOREVER"; }
+  else { alert("❌ Please type 1, 2 or 3. Try again."); return; }
   localStorage.setItem('crystal_paid','yes');
   localStorage.setItem('crystal_tx',tx);
-  alert("✅ Verified! WhatsApp unlocked. Your Transaction ID "+tx+" will be sent to us automatically.");
-  openWA(type, tx);
+  localStorage.setItem('crystal_expiry', expiryTime.toString());
+  localStorage.setItem('crystal_plan', planName);
+  alert("✅ Verified! WhatsApp unlocked.\nPlan: "+planName+"\nTransaction ID: "+tx+"\n\nAfter this expires, you must pay again for next stone.");
+  openWA(type, tx, planName);
 }
-function openWA(type, tx){
+function openWA(type, tx, plan){
   let text = "";
-  if(type==='buyer') text = "Hello Crystal Dive Global, I am a ROUGH GEM BUYER. I have PAID. My Transaction ID is: " + tx;
-  else if(type==='seller') text = "Hello Crystal Dive Global, I am a SELLER. I have ROUGH GEMS to sell. I have PAID. My Transaction ID is: " + tx;
-  else if(type==='receipt') text = "Hi Crystal Dive, I have paid. Here is my receipt. My Transaction ID is: " + tx + ". Here are my stone photos + weights.";
-  else text = "Hi Crystal Dive, I want to verify my stone. I have PAID. My Transaction ID is: " + tx;
+  if(type==='buyer') text = "Hello Crystal Dive Global, I am a ROUGH GEM BUYER. I have PAID. Plan: "+plan+". My Transaction ID is: " + tx;
+  else if(type==='seller') text = "Hello Crystal Dive Global, I am a SELLER. I have ROUGH GEMS to sell. I have PAID. Plan: "+plan+". My Transaction ID is: " + tx;
+  else if(type==='receipt') text = "Hi Crystal Dive, I have paid. Plan: "+plan+". My Transaction ID is: " + tx + ". Here are my stone photos + weights.";
+  else text = "Hi Crystal Dive, I want to verify my stone. I have PAID. Plan: "+plan+". My Transaction ID is: " + tx;
   window.open("https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent(text), "_blank");
 }
 // ===== END WHATSAPP LOCK =====
