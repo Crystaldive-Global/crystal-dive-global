@@ -1,0 +1,31 @@
+{
+  "name": "Crystal Dive Global - Gem Tester",
+  "short_name": "Crystal Dive",
+  "description": "Have a Gem Crystal? Don't know if it's REAL? Test it yourself FREE - SG Calculator + Expert Video Guide.",
+  "start_url": "/crystal-dive-global/",
+  "scope": "/crystal-dive-global/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
