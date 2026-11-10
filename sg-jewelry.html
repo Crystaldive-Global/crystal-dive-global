@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jewelry SG - Crystal Dive</title>
+<style>
+body{font-family:Arial;padding:16px;background:#0f172a;color:#fff;max-width:480px;margin:auto}
+.card{background:#1e293b;padding:16px;border-radius:12px;margin-top:12px}
+label{display:block;margin-top:12px}
+select,input{width:100%;padding:12px;margin-top:6px;border-radius:8px;border:none;font-size:16px}
+button{width:100%;padding:14px;margin-top:16px;background:#f59e0b;color:#fff;border:none;border-radius:10px;font-size:18px;font-weight:bold}
+.result{background:#0ea5e9;padding:14px;border-radius:10px;margin-top:14px;font-size:17px;display:none}
+a{color:#38bdf8}
+</style>
+</head>
+<body>
+<h1>💍 Jewelry SG</h1>
+<p>Ring, Necklace, Bracelet, Earring - Metal + Gem Together</p>
+<p><a href="index.html">← Back to Home</a></p>
+<div class="card">
+<label>Jewelry Type</label>
+<select id="type">
+<option value="Ring">Ring</option>
+<option value="Necklace">Necklace</option>
+<option value="Bracelet">Bracelet</option>
+<option value="Earring">Earring</option>
+</select>
+<label>Metal Type</label>
+<select id="metal">
+<option value="15.5" data-name="Gold 18k">Gold 18k (SG 15.5)</option>
+<option value="13.5" data-name="Gold 14k">Gold 14k (SG 13.5)</option>
+<option value="10.4" data-name="Silver 925">Silver 925 (SG 10.4)</option>
+<option value="21.4" data-name="Platinum">Platinum (SG 21.4)</option>
+</select>
+<label>Total Weight in Air (g) - Jewelry + Gem</label>
+<input id="air" type="number" step="0.01" placeholder="e.g. 5.20">
+<label>Total Weight in Water (g)</label>
+<input id="water" type="number" step="0.01" placeholder="e.g. 4.80">
+<label>Metal Weight (g) - if you know it</label>
+<input id="metalWeight" type="number" step="0.01" placeholder="e.g. 4.50">
+<button onclick="calc()">Calculate Jewelry SG</button>
+<div id="res" class="result"></div>
+</div>
+<script>
+function calc(){
+  let air=parseFloat(document.getElementById('air').value);
+  let water=parseFloat(document.getElementById('water').value);
+  let metalSG=parseFloat(document.getElementById('metal').value);
+  let metalName=document.getElementById('metal').selectedOptions[0].dataset.name;
+  let type=document.getElementById('type').value;
+  let mW=parseFloat(document.getElementById('metalWeight').value);
+  let box=document.getElementById('res');
+  if(!air||!water||air<=water){ box.style.display='block'; box.innerHTML='Please enter correct weights sir. Air must be more than Water.'; return; }
+  let overallSG = air / (air - water);
+  let msg = `<b>${type} - Jewelry SG (Overall) = ${overallSG.toFixed(2)}</b><br><br>`;
+  if(!mW){
+    msg += `This is metal + gem together, so it is higher than Gem SG.<br><br>Enter Metal Weight to separate gem.`;
+  } else {
+    let gemWeight = air - mW;
+    if(gemWeight<=0){ box.style.display='block'; box.innerHTML='Metal weight cannot be more than total weight sir.'; return; }
+    let totalVol = air / overallSG;
+    let metalVol = mW / metalSG;
+    let gemVol = totalVol - metalVol;
+    let gemSG = gemVol>0 ? gemWeight / gemVol : 0;
+    msg += `Metal: ${metalName} - ${mW.toFixed(2)}g<br>`;
+    msg += `Gem Weight Aside Metal = <b>${gemWeight.toFixed(2)}g</b><br>`;
+    msg += `Gem SG Inside Jewelry = <b>${gemSG.toFixed(2)}</b><br><br>`;
+    if(gemSG>3.45 && gemSG<3.60) msg += '✅ Gem Likely DIAMOND (3.52)';
+    else if(gemSG>3.15 && gemSG<3.30) msg += '⚠️ Gem Likely MOISSANITE (3.22)';
+    else if(gemSG>5.4) msg += '⚠️ Gem Likely CUBIC ZIRCONIA (5.6-6.0)';
+    else msg += 'Check gem - SG does not match diamond. Try Scan also.';
+  }
+  box.style.display='block'; box.innerHTML=msg;
+}
+</script>
+</body>
+</html>
