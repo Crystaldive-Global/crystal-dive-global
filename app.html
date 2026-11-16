@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CrystalDive - Identify with Science, Not Guesswork</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial;background:#0A1931;color:#1a1a1a}
+header{background:#0A1931;color:#fff;padding:22px 16px;text-align:center;border-bottom:4px solid #C9A227}
+header h1{margin:0;font-size:30px;letter-spacing:1px}header h1 span{color:#C9A227}
+header p{margin:6px 0 0;color:#D9C98A;font-size:14px}
+a{color:#0A1931}
+.wrap{max-width:520px;margin:0 auto;padding:14px}
+.card{background:#fff;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.card h3{margin:0 0 12px;color:#0A1931;font-size:18px}
+label{display:block;font-size:13px;font-weight:700;margin:10px 0 5px;color:#333}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:15px}
+button{width:100%;padding:13px;border:0;border-radius:10px;background:#0A1931;color:#fff;font-weight:700;font-size:15px;margin-top:12px;cursor:pointer}
+button.gold{background:#C9A227;color:#0A1931}
+.small{font-size:13px;line-height:1.6;color:#444}
+.result{background:#FFF8E1;border:1px solid #C9A227;border-radius:10px;padding:12px;margin-top:12px;font-size:14px;line-height:1.6}
+.libItem{border-bottom:1px solid #eee;padding:10px 0;font-size:14px}
+.libItem b{color:#0A1931}
+.badge{display:inline-block;background:#0A1931;color:#fff;padding:3px 8px;border-radius:20px;font-size:11px}
+.check{font-size:14px;line-height:2}
+.linkBox{background:#FFF8E1;border:2px dashed #C9A227;border-radius:12px;padding:14px;text-align:center;margin-top:10px}
+.linkBox a{font-weight:800;color:#0A1931;word-break:break-all;font-size:14px}
+footer{text-align:center;color:#fff;padding:18px;font-size:12px;opacity:.8}
+img.prev{width:100%;border-radius:12px;margin-top:10px}
+</style></head>
+<body>
+<header><h1>CRYSTAL<span>DIVE</span></h1><p>Identify with Science, Not Guesswork</p><p style="font-size:12px;color:#fff;opacity:.7">Version 1.0 • November 2026</p>
+<p style="margin-top:10px"><a href="https://crystaldive-global.github.io/crystal-dive-global/app.html" style="color:#C9A227;font-size:13px">🔗 crystaldive-global.github.io/crystal-dive-global/app.html</a></p>
+</header>
+<div class="wrap">
+
+<!-- TOP CLICKABLE LINK -->
+<div class="card" style="text-align:center"><h3>💎 Have a Gem Crystal? Don't know if it's REAL?</h3><p class="small">Test it yourself FREE - SG Calculator + Expert Guide</p>
+<div class="linkBox">👇 Tap To Open / Share<br><a href="https://crystaldive-global.github.io/crystal-dive-global/app.html">https://crystaldive-global.github.io/crystal-dive-global/app.html</a></div>
+<button class="gold" onclick="window.open('https://crystaldive-global.github.io/crystal-dive-global/app.html','_blank')">Open CrystalDive App ↗</button>
+<button onclick="copyLink()">📋 Copy App Link</button>
+<button onclick="shareApp()">📤 Share App Link</button>
+</div>
+
+<!-- 1 CAMERA -->
+<div class="card"><h3>1. 📷 Camera Scan</h3><p class="small">Take photo on white background, daylight. For your record only.</p><input type="file" accept="image/*" capture="environment" onchange="preview(this)"><img id="photoPrev" class="prev" style="display:none"></div>
+
+<!-- 2 CRYSTAL SG -->
+<div class="card"><h3>2. 💎 Crystal SG Test - Stone Alone</h3>
+<label>Dry Weight (g)</label><input id="cDry" type="number" step="0.01" placeholder="e.g. 10.00">
+<label>Weight in Water (g)</label><input id="cWet" type="number" step="0.01" placeholder="e.g. 7.50">
+<button onclick="calcCrystal()">Calculate Crystal SG</button><div id="cResult" class="result" style="display:none"></div>
+<p class="small">Formula: SG = Dry ÷ (Dry - Water). Use 0.01g scale, distilled water, thin thread.</p></div>
+
+<!-- 3 JEWELRY SG -->
+<div class="card"><h3>3. 💍 Jewelry SG Test - Stone + Metal</h3>
+<label>Total Jewelry Dry Weight (g)</label><input id="jDry" type="number" step="0.01" placeholder="e.g. 5.00">
+<label>Total Jewelry Weight in Water (g)</label><input id="jWet" type="number" step="0.01" placeholder="e.g. 4.30">
+<label>Metal Type</label><select id="metalType"><option value="19.3">Gold - SG 19.30</option><option value="10.49">Silver - SG 10.49</option><option value="21.45">Platinum - SG 21.45</option><option value="8.9">Copper - SG 8.90</option><option value="7.87">Steel - SG 7.87</option></select>
+<label>Metal Weight Only (g)</label><input id="metalW" type="number" step="0.01" placeholder="e.g. 4.00">
+<button onclick="calcJewelry()">Calculate True Stone SG</button><div id="jResult" class="result" style="display:none"></div></div>
+
+<!-- 4 IDENTIFY -->
+<div class="card"><h3>4. 🔍 Identify Tool</h3><label>Enter SG</label><input id="sgInput" type="number" step="0.01" placeholder="e.g. 2.65"><button onclick="identify()">Identify Crystal</button><div id="idResult" class="result" style="display:none"></div></div>
+
+<!-- 5 LIBRARY -->
+<div class="card"><h3>5. 📚 Crystal Library</h3><input id="libSearch" placeholder="Search e.g. Diamond..." oninput="renderLib()"><div id="libList"></div></div>
+
+<!-- 6 BUY -->
+<div class="card"><h3>6. 🌐 One Tap To Web Page To Buy</h3><p class="small">Visit official website to buy / learn more.</p><button class="gold" onclick="window.open('https://crystaldive-global.github.io/crystal-dive-global/','_blank')">Visit Website ↗</button>
+<div class="linkBox"><a href="https://crystaldive-global.github.io/crystal-dive-global/">https://crystaldive-global.github.io/crystal-dive-global/</a></div></div>
+
+<!-- 7 SAVE -->
+<div class="card"><h3>7. 💾 Save Test Result</h3><label>Crystal Name</label><input id="saveName" placeholder="e.g. Amethyst"><button onclick="saveTest()">Save To My Collection</button></div>
+
+<!-- 8 CHECKLIST -->
+<div class="card"><h3>8. ✅ Fake vs Real Checklist</h3><div class="check"><input type="checkbox"> SG matches reference?<br><input type="checkbox"> Cold to touch?<br><input type="checkbox"> No air bubbles?<br><input type="checkbox"> Hardness test passes?<br><input type="checkbox"> Weight feels correct?<br><input type="checkbox"> Not too perfect?</div></div>
+
+<!-- 9 COLLECTION -->
+<div class="card"><h3>9. 🗂️ My Collection + Saved Results</h3><div id="collection"></div><button onclick="clearAll()" style="background:#eee;color:#333">Clear Collection</button></div>
+
+<!-- 10 GUIDE -->
+<div class="card"><h3>10. 📖 How To Do SG Test Guide</h3><p class="small"><b>1:</b> Calibrate 0.01g scale.<br><b>2:</b> Weigh dry stone.<br><b>3:</b> Fill cup distilled water, tare.<br><b>4:</b> Hang stone with thread, fully in water, do NOT touch cup.<br><b>5:</b> SG = Dry ÷ (Dry - Water).<br><b>6:</b> Repeat twice.</p></div>
+
+<!-- 11 PRIVACY -->
+<div class="card"><h3>11. 🔒 Privacy Policy</h3><p class="small"><b>Updated: Nov 16, 2026.</b> We do not require account or login. Photos & results stored locally on your device only. We do NOT collect name, email, phone, location. We do not sell data. GDPR & CCPA compliant. Clear data anytime via Clear Collection.</p></div>
+
+<!-- 12 TERMS -->
+<div class="card"><h3>12. 📜 Terms of Use</h3><p class="small"><b>Effective: Nov 16, 2026.</b> Educational tool to estimate SG. Not lab certification or appraisal. You are responsible for measurements. All branding owned by CrystalDive. Provided "as is".</p></div>
+
+<!-- 13 DISCLAIMER -->
+<div class="card"><h3>13. ⚠️ Disclaimer</h3><p class="small"><b>Guide only, not lab certificate.</b> SG alone cannot prove authenticity, origin, treatment or value. For purchase, insurance or legal use, seek GIA / IGI lab.</p></div>
+
+<!-- 14 ABOUT -->
+<div class="card"><h3>14. ℹ️ About CrystalDive</h3><p class="small">Helping jewelers, collectors & students identify crystals with science. No guesswork.</p></div>
+
+<!-- 15 CONTACT -->
+<div class="card"><h3>15. 📞 Contact - Goes To Web Page</h3><p class="small">No email inside App. Tap to go to website to contact.</p><button class="gold" onclick="window.open('https://crystaldive-global.github.io/crystal-dive-global/','_blank')">Go To Website To Contact ↗</button>
+<div class="linkBox"><a href="https://crystaldive-global.github.io/crystal-dive-global/">https://crystaldive-global.github.io/crystal-dive-global/</a></div></div>
+
+<!-- 16 VERSION -->
+<div class="card"><h3>16. 📱 App Version 1.0</h3><p class="small">CrystalDive Version 1.0 • November 2026 • Mobile Web App</p></div>
+
+<!-- 17 SHARE -->
+<div class="card"><h3>17. 📤 Share App Button</h3><p class="small">Share this exact link:</p><div class="linkBox"><a href="https://crystaldive-global.github.io/crystal-dive-global/app.html">https://crystaldive-global.github.io/crystal-dive-global/app.html</a></div><button onclick="shareApp()">Share App Now</button><button onclick="copyLink()" style="background:#eee;color:#333">Copy Link</button></div>
+
+<!-- 18 FAQ -->
+<div class="card"><h3>18. ❓ FAQ + ⚖️ How To Weigh Correctly</h3><p class="small"><b>Why SG off?</b> Scale not 0.01g, stone touching cup, bubbles, metal setting.<br><br><b>How to weigh in water?</b> Thin thread, fully submerged, not touching cup, no bubbles.<br><br><b>Jewelry without removing stone?</b> Use Jewelry Test - enter metal type + metal weight.<br><br><b>Is SG enough?</b> No. Strong guide, but use checklist + lab for final proof.</p></div>
+
+</div>
+<footer>© 2026 CrystalDive • <a href="https://crystaldive-global.github.io/crystal-dive-global/app.html" style="color:#C9A227">crystaldive-global.github.io/crystal-dive-global/app.html</a></footer>
+<script>
+const LIB=[{n:"Quartz",sg:2.65},{n:"Amethyst",sg:2.65},{n:"Citrine",sg:2.65},{n:"Diamond",sg:3.52},{n:"Ruby",sg:4.00},{n:"Sapphire",sg:4.00},{n:"Emerald",sg:2.71},{n:"Topaz",sg:3.53},{n:"Garnet",sg:3.80},{n:"Jade - Nephrite",sg:2.95},{n:"Tourmaline",sg:3.06},{n:"Opal",sg:2.10},{n:"Aquamarine",sg:2.68},{n:"Peridot",sg:3.34},{n:"Lapis Lazuli",sg:2.80},{n:"Malachite",sg:3.95}];
+function findName(sg){let best=null,diff=99;LIB.forEach(x=>{let d=Math.abs(x.sg-sg);if(d<diff){diff=d;best=x}});return diff<0.15?best.n+" (SG "+best.sg+")":"No close match - Check measurement";}
+function calcCrystal(){let d=parseFloat(document.getElementById('cDry').value),w=parseFloat(document.getElementById('cWet').value);if(!d||!w||d<=w){alert('Enter correct weights');return}let sg=(d/(d-w));let el=document.getElementById('cResult');el.style.display='block';el.innerHTML='Crystal SG = <b>'+sg.toFixed(2)+'</b><br>Possible: '+findName(sg);window._lastSG=sg.toFixed(2);}
+function calcJewelry(){let t=parseFloat(document.getElementById('jDry').value),w=parseFloat(document.getElementById('jWet').value),ms=parseFloat(document.getElementById('metalType').value),mw=parseFloat(document.getElementById('metalW').value);if(!t||!w||!mw){alert('Enter Total, Water and Metal Weight');return}let tVol=t-w,mVol=mw/ms,sW=t-mw,sVol=tVol-mVol;if(sVol<=0){alert('Metal weight too high');return}let sg=sW/sVol;let el=document.getElementById('jResult');el.style.display='block';el.innerHTML='Stone Weight = '+sW.toFixed(2)+'g<br>Metal Weight = '+mw.toFixed(2)+'g<br><b>True Stone SG = '+sg.toFixed(2)+'</b><br>Possible: '+findName(sg);window._lastSG=sg.toFixed(2);}
+function identify(){let sg=parseFloat(document.getElementById('sgInput').value);if(!sg){alert('Enter SG');return}let el=document.getElementById('idResult');el.style.display='block';el.innerHTML='SG '+sg+' → Possible: <b>'+findName(sg)+'</b>';}
+function renderLib(){let q=(document.getElementById('libSearch').value||'').toLowerCase();let h='';LIB.filter(x=>x.n.toLowerCase().includes(q)).forEach(x=>{h+='<div class="libItem"><b>'+x.n+'</b> <span class="badge">SG '+x.sg+'</span></div>'});document.getElementById('libList').innerHTML=h||'No result';}
+function preview(inp){let f=inp.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{let im=document.getElementById('photoPrev');im.src=e.target.result;im.style.display='block';window._photo=e.target.result};r.readAsDataURL(f);}
+function saveTest(){let name=document.getElementById('saveName').value||'Unnamed Stone';let sg=window._lastSG||document.getElementById('sgInput').value||'—';let arr=JSON.parse(localStorage.getItem('cd')||'[]');arr.unshift({name,sg,photo:window._photo||'',date:new Date().toLocaleDateString()});localStorage.setItem('cd',JSON.stringify(arr));renderCol();alert('Saved!');}
+function renderCol(){let arr=JSON.parse(localStorage.getItem('cd')||'[]');let el=document.getElementById('collection');if(!arr.length){el.innerHTML='<p class="small">No saved results yet.</p>';return}el.innerHTML=arr.map(x=>'<div class="libItem"><b>'+x.name+'</b> - SG '+x.sg+' • '+x.date+(x.photo?'<br><img src="'+x.photo+'" style="width:100%;border-radius:10px;margin-top:6px">':'')+'</div>').join('');}
+function clearAll(){localStorage.removeItem('cd');renderCol();}
+function copyLink(){let l='https://crystaldive-global.github.io/crystal-dive-global/app.html';navigator.clipboard.writeText(l).then(()=>alert('Link copied: '+l));}
+function shareApp(){let t='💎 Have a Gem Crystal? Don\'t know if it\'s REAL? Test it yourself FREE on CrystalDive: https://crystaldive-global.github.io/crystal-dive-global/app.html';if(navigator.share){navigator.share({title:'CrystalDive',text:t,url:'https://crystaldive-global.github.io/crystal-dive-global/app.html'})}else{navigator.clipboard.writeText(t);alert('Link copied! Share on WhatsApp');}}
+renderLib();renderCol();
+</script></body></html>
