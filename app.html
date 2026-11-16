@@ -56,3 +56,32 @@ img.prev{width:100%;border-radius:12px;margin-top:10px}
 <div class="card"><h3>🗂️ My Collection</h3><div id="collection"></div><button onclick="clearAll()" style="background:#eee;color:#333">Clear Collection</button></div>
 
 <div class="card"><h3>📖 How To SG Test</h3><p class="small">1. Calibrate 0.01g scale.<br>2. Weigh dry.<br>3. Weigh in distilled water, not touching cup.<br>4. SG = Dry ÷ (Dry - Water). Repeat twice.</p></div
+        <script>
+// FIX LIBRARY SEARCH - Paste at bottom
+function renderLibFIX(){
+  try{
+    var q = (document.getElementById('libSearch').value||'').toLowerCase().trim();
+    var list = LIB.filter(function(x){
+      var matchGroup = (curFilter==='All' || x.g===curFilter);
+      var matchSearch = !q || x.name.toLowerCase().indexOf(q) !== -1 || x.f.toLowerCase().indexOf(q) !== -1;
+      return matchGroup && matchSearch;
+    });
+    var countEl = document.getElementById('libCount');
+    if(countEl) countEl.innerHTML = 'Showing <b>'+list.length+'</b> minerals of '+LIB.length+' in library';
+    var listEl = document.getElementById('libList');
+    if(!listEl) return;
+    if(!list.length){
+      listEl.innerHTML = '<p class="small">No result for "'+q+'". Try Quartz, Topaz, Diamond</p>';
+      return;
+    }
+    listEl.innerHTML = list.map(function(x){
+      return '<div class="libItem"><b>'+x.name+'</b> <span class="badge">SG '+x.sg+'</span> <span class="badge" style="background:#C9A227;color:#0A1931">H '+x.h+'</span> <span class="badge" style="background:#eee;color:#333">'+x.g+'</span><br><span style="font-size:12px;color:#666">'+x.f+'</span></div>';
+    }).join('');
+  }catch(e){
+    document.getElementById('libList').innerHTML = '<p class="small">Library error: '+e.message+'</p>';
+  }
+}
+renderLib = renderLibFIX;
+document.getElementById('libSearch').addEventListener('input', renderLibFIX);
+renderLibFIX();
+</script>                                                                                                                                                                                                    
