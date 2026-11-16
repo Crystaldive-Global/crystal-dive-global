@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crystal Dive Global - SG Tester</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#0A1931;color:#fff;padding:12px}
+.card{background:#fff;color:#0A1931;border-radius:16px;padding:16px;margin-bottom:12px}
+h1{text-align:center;color:#C9A227;margin:6px 0 2px} .sub{text-align:center;color:#ccc;font-size:13px;margin-bottom:12px}
+h2{margin:0 0 10px;font-size:18px} input,select{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0;font-size:16px}
+button{width:100%;padding:13px;border:none;border-radius:12px;background:#C9A227;color:#0A1931;font-weight:800;font-size:16px;margin-top:8px;cursor:pointer}
+.btn2{background:#0A1931;color:#fff}.btn3{background:#eee;color:#333}.small{font-size:13px;color:#666}
+.result{background:#FFF8DC;border-radius:10px;padding:12px;margin-top:10px;font-weight:700}
+.badge{display:inline-block;background:#0A1931;color:#fff;padding:3px 8px;border-radius:20px;font-size:12px;margin-right:4px}
+.libItem{background:#f7f7f7;border-radius:10px;padding:10px;margin:6px 0;color:#222}
+.filterBtn{width:auto;padding:8px 12px;margin:3px;background:#eee;color:#333;border-radius:20px;font-size:13px}
+.filterBtn.active{background:#0A1931;color:#fff}
+a{color:#0A1931}
+</style>
+</head>
+<body>
+<h1>💎 CRYSTAL DIVE GLOBAL</h1>
+<p class="sub">Professional Gemstone SG Tester • Abuja • Nigeria</p>
+
+<div class="card">
+<h2>📷 Camera Scan</h2>
+<p class="small">Take a photo of your stone to compare colour and shape. SG test below is the accurate test.</p>
+<input type="file" accept="image/*" capture="environment" id="camInput">
+<div id="camPreview"></div>
+</div>
+
+<div class="card">
+<h2>💎 Crystal SG Test</h2>
+<label>Dry Weight (g)</label><input type="number" id="dry1" placeholder="e.g. 10" step="0.01">
+<label>Weight in Water (g)</label><input type="number" id="wet1" placeholder="e.g. 7.50" step="0.01">
+<button onclick="calcSG('dry1','wet1','res1')">Calculate SG</button>
+<div id="res1" class="result" style="display:none"></div>
+</div>
+
+<div class="card">
+<h2>💍 Jewelry SG Test</h2>
+<label>Dry Weight (g)</label><input type="number" id="dry2" placeholder="e.g. 5.20" step="0.01">
+<label>Weight in Water (g)</label><input type="number" id="wet2" placeholder="e.g. 4.80" step="0.01">
+<button onclick="calcSG('dry2','wet2','res2')">Calculate SG</button>
+<div id="res2" class="result" style="display:none"></div>
+</div>
+
+<div class="card">
+<h2>🔍 Identify By SG</h2>
+<label>Enter Your SG Result</label><input type="number" id="sgLook" placeholder="e.g. 3.52" step="0.01">
+<button onclick="lookupSG()">Identify Stone</button>
+<div id="resLook" class="result" style="display:none"></div>
+</div>
+
+<div class="card" style="text-align:center">
+<h2>🌐 Visit Our Web Page</h2>
+<p class="small">See our full collection, prices and how to buy.</p>
+<a href="https://crystaldive-global.github.io/crystal-dive-global/" target="_blank"><button>Visit Our Web Page ↗</button></a>
+</div>
+
+<div class="card">
+<h2>📚 COMPLETE MINERAL LIBRARY</h2>
+<input type="text" id="libSearch" placeholder="Search mineral... e.g. Topaz, Quartz, Diamond">
+<div id="filters">
+<button class="filterBtn active" onclick="setFilter('All',this)">All</button>
+<button class="filterBtn" onclick="setFilter('Silicate',this)">Silicate</button>
+<button class="filterBtn" onclick="setFilter('Oxide',this)">Oxide</button>
+<button class="filterBtn" onclick="setFilter('Carbonate',this)">Carbonate</button>
+<button class="filterBtn" onclick="setFilter('Sulfide',this)">Sulfide</button>
+<button class="filterBtn" onclick="setFilter('Native',this)">Native</button>
+</div>
+<p class="small" id="libCount"></p>
+<div id="libList"></div>
+<p class="small">Search is live - type and results appear instantly. Tap filter to narrow.</p>
+</div>
+
+<div class="card">
+<h2>📖 How To SG Test</h2>
+<p class="small">1. Calibrate 0.01g scale.<br>2. Weigh dry.<br>3. Weigh in distilled water, not touching cup.<br>4. SG = Dry ÷ (Dry - Water). Repeat twice.</p>
+</div>
+
+<div class="card"><button class="btn2" onclick="clearAll()">Clear Collection</button></div>
+
+<script>
+var curFilter='All';
+var LIB=[
+{name:"Diamond",sg:"3.52",h:"10",g:"Native",f:"C - Hardest stone"},
+{name:"Quartz",sg:"2.65",h:"7",g:"Silicate",f:"SiO2 - Amethyst, Citrine, Clear Quartz"},
+{name:"Amethyst",sg:"2.65",h:"7",g:"Silicate",f:"Purple Quartz"},
+{name:"Citrine",sg:"2.65",h:"7",g:"Silicate",f:"Yellow Quartz"},
+{name:"Topaz",sg:"3.53",h:"8",g:"Silicate",f:"Al2SiO4(F,OH)2 - Blue, Yellow, Pink"},
+{name:"Ruby",sg:"4.00",h:"9",g:"Oxide",f:"Al2O3 - Red Corundum"},
+{name:"Sapphire",sg:"4.00",h:"9",g:"Oxide",f:"Al2O3 - Blue Corundum"},
+{name:"Emerald",sg:"2.71",h:"7.5",g:"Silicate",f:"Beryl - Green"},
+{name:"Aquamarine",sg:"2.69",h:"7.5",g:"Silicate",f:"Beryl - Blue"},
+{name:"Garnet Almandine",sg:"4.30",h:"7.5",g:"Silicate",f:"Red Garnet"},
+{name:"Garnet Pyrope",sg:"3.70",h:"7.5",g:"Silicate",f:"Red Garnet"},
+{name:"Peridot",sg:"3.34",h:"6.5",g:"Silicate",f:"Olivine - Green"},
+{name:"Tourmaline",sg:"3.06",h:"7.5",g:"Silicate",f:"Many colours"},
+{name:"Tanzanite",sg:"3.35",h:"6.5",g:"Silicate",f:"Blue-Purple Zoisite"},
+{name:"Zircon",sg:"4.69",h:"7.5",g:"Silicate",f:"High brilliance"},
+{name:"Spinel",sg:"3.60",h:"8",g:"Oxide",f:"Red, Blue, Black"},
+{name:"Opal",sg:"2.10",h:"5.5",g:"Silicate",f:"Play of colour"},
+{name:"Jadeite",sg:"3.34",h:"7",g:"Silicate",f:"Jade - Green"},
+{name:"Nephrite",sg:"2.95",h:"6.5",g:"Silicate",f:"Jade - Green"},
+{name:"Turquoise",sg:"2.80",h:"5.5",g:"Silicate",f:"Blue-Green"},
+{name:"Lapis Lazuli",sg:"2.80",h:"5.5",g:"Silicate",f:"Deep Blue"},
+{name:"Malachite",sg:"4.00",h:"4",g:"Carbonate",f:"Green banded"},
+{name:"Azurite",sg:"3.77",h:"3.5",g:"Carbonate",f:"Deep Blue"},
+{name:"Calcite",sg:"2.71",h:"3",g:"Carbonate",f:"Cleaves easily"},
+{name:"Fluorite",sg:"3.18",h:"4",g:"Silicate",f:"Purple, Green, Blue"},
+{name:"Hematite",sg:"5.26",h:"6.5",g:"Oxide",f:"Metallic grey, magnetic"},
+{name:"Magnetite",sg:"5.15",h:"6",g:"Oxide",f:"Strongly magnetic"},
+{name:"Pyrite",sg:"5.02",h:"6.5",g:"Sulfide",f:"Fools Gold"},
+{name:"Gold",sg:"19.32",h:"2.5",g:"Native",f:"Au - Yellow metal"},
+{name:"Silver",sg:"10.49",h:"2.5",g:"Native",f:"Ag - White metal"},
+{name:"Copper",sg:"8.96",h:"3",g:"Native",f:"Cu - Red metal"},
+{name:"Beryl",sg:"2.70",h:"7.5",g:"Silicate",f:"Emerald family"},
+{name:"Morganite",sg:"2.80",h:"7.5",g:"Silicate",f:"Pink Beryl"},
+{name:"Moonstone",sg:"2.58",h:"6",g:"Silicate",f:"Adularescence"},
+{name:"Labradorite",sg:"2.70",h:"6",g:"Silicate",f:"Flash colours"},
+{name:"Obsidian",sg:"2.40",h:"5.5",g:"Silicate",f:"Volcanic glass"},
+{name:"Agate",sg:"2.65",h:"7",g:"Silicate",f:"Banded Chalcedony"},
+{name:"Onyx",sg:"2.65",h:"7",g:"Silicate",f:"Black banded"},
+{name:"Jasper",sg:"2.65",h:"7",g:"Silicate",f:"Opaque Quartz"},
+{name:"Tiger Eye",sg:"2.65",h:"7",g:"Silicate",f:"Chatoyant brown-gold"},
+{name:"Sodalite",sg:"2.30",h:"6",g:"Silicate",f:"Blue"},
+{name:"Apatite",sg:"3.20",h:"5",g:"Silicate",f:"Blue, Green, Yellow"},
+{name:"Kyanite",sg:"3.60",h:"5",g:"Silicate",f:"Blue bladed"},
+{name:"Iolite",sg:"2.60",h:"7",g:"Silicate",f:"Blue-Violet"},
+{name:"Chrysoberyl",sg:"3.73",h:"8.5",g:"Oxide",f:"Cats Eye"},
+{name:"Alexandrite",sg:"3.73",h:"8.5",g:"Oxide",f:"Colour change"},
+{name:"Sphene",sg:"3.53",h:"5.5",g:"Silicate",f:"Titanite - High fire"},
+{name:"Diopside",sg:"3.30",h:"6",g:"Silicate",f:"Green"},
+{name:"Epidote",sg:"3.40",h:"6.5",g:"Silicate",f:"Green"},
+{name:"Sphalerite",sg:"4.10",h:"3.5",g:"Sulfide",f:"Zinc ore"},
+{name:"Galena",sg:"7.50",h:"2.5",g:"Sulfide",f:"Lead ore, heavy"},
+{name:"Barite",sg:"4.50",h:"3.5",g:"Sulfide",f:"Heavy white"},
+{name:"Aragonite",sg:"2.93",h:"3.5",g:"Carbonate",f:"CaCO3"},
+{name:"Dolomite",sg:"2.85",h:"3.5",g:"Carbonate",f:"Pink, White"},
+{name:"Siderite",sg:"3.96",h:"4",g:"Carbonate",f:"Iron carbonate"},
+{name:"Rhodochrosite",sg:"3.60",h:"4",g:"Carbonate",f:"Pink banded"},
+{name:"Smithsonite",sg:"4.40",h:"5",g:"Carbonate",f:"Blue, Green, Pink"}
+];
+function calcSG(d,w,r){
+  var dry=parseFloat(document.getElementById(d).value);
+  var wet=parseFloat(document.getElementById(w).value);
+  var el=document.getElementById(r);
+  if(!dry||!wet||dry<=wet){el.style.display='block';el.innerHTML='Enter valid weights. Dry must be > Water.';return;}
+  var sg=dry/(dry-wet);
+  var match=LIB.filter(function(x){return Math.abs(parseFloat(x.sg)-sg)<0.15});
+  var txt=match.length?match.map(function(m){return m.name}).join(', '):'No close match - check weighing';
+  el.style.display='block';el.innerHTML='SG = <b>'+sg.toFixed(2)+'</b><br>Possible: '+txt;
+}
+function lookupSG(){
+  var v=parseFloat(document.getElementById('sgLook').value);
+  var el=document.getElementById('resLook');
+  if(!v){el.style.display='block';el.innerHTML='Enter SG';return;}
+  var m=LIB.filter(function(x){return Math.abs(parseFloat(x.sg)-v)<0.12});
+  el.style.display='block';
+  el.innerHTML=m.length?m.map(function(x){return x.name+' (SG '+x.sg+')'}).join('<br>'):'No match near '+v;
+}
+function setFilter(f,btn){
+  curFilter=f;
+  document.querySelectorAll('.filterBtn').forEach(function(b){b.classList.remove('active')});
+  if(btn) btn.classList.add('active');
+  renderLib();
+}
+function renderLib(){
+  var q=(document.getElementById('libSearch').value||'').toLowerCase().trim();
+  var list=LIB.filter(function(x){
+    var g=(curFilter==='All'||x.g===curFilter);
+    var s=!q||x.name.toLowerCase().indexOf(q)>-1||x.f.toLowerCase().indexOf(q)>-1;
+    return g&&s;
+  });
+  document.getElementById('libCount').innerHTML='Showing <b>'+list.length+'</b> minerals of '+LIB.length;
+  var el=document.getElementById('libList');
+  if(!list.length){el.innerHTML='<p class="small">No result for "'+q+'". Try Quartz, Topaz, Diamond</p>';return;}
+  el.innerHTML=list.map(function(x){
+    return '<div class="libItem"><b>'+x.name+'</b> <span class="badge">SG '+x.sg+'</span> <span class="badge" style="background:#C9A227;color:#0A1931">H '+x.h+'</span> <span class="badge" style="background:#eee;color:#222">'+x.g+'</span><br><span style="font-size:12px;color:#666">'+x.f+'</span></div>';
+  }).join('');
+}
+document.getElementById('libSearch').addEventListener('input',renderLib);
+document.getElementById('camInput').addEventListener('change',function(e){
+  var f=e.target.files[0]; if(!f) return;
+  var r=new FileReader(); r.onload=function(ev){document.getElementById('camPreview').innerHTML='<img src="'+ev.target.result+'" style="width:100%;border-radius:10px;margin-top:8px">'}; r.readAsDataURL(f);
+});
+function clearAll(){document.querySelectorAll('input').forEach(function(i){if(i.type!=='file')i.value=''}); document.querySelectorAll('.result').forEach(function(d){d.style.display='none'});}
+renderLib();
+</script>
+</body>
+</html>
