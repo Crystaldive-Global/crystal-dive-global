@@ -207,5 +207,93 @@ function scoreCheck(){ let n=document.querySelectorAll('#checks input:checked').
 function shareApp(){ let url=location.href; if(navigator.share) navigator.share({title:'Crystal Dive Global',text:'Gemological Standard SG Tester',url}); else { navigator.clipboard.writeText(url); alert('Link copied: '+url); } }
 renderLibrary(); renderChecks(); renderSaved();
 </script>
+<!-- === CRYSTAL DIVE: 5-FEATURE IDENTIFIER + RANKED MATCHES === -->
+<div id="cd-identifier" style="padding:16px;margin:16px 0;background:#0f172a;color:#fff;border-radius:16px;font-family:sans-serif">
+  <h2 style="margin:0 0:8px">🔍 Advanced Gem Identifier</h2>
+  <p style="opacity:.8;font-size:13px">Enter what you measured. We rank the closest matches.</p>
+
+  <label>Refractive Index (RI) e.g. 1.76</label><br>
+  <input id="cd-ri" type="number" step="0.001" placeholder="1.76" style="width:100%;padding:10px;border-radius:8px;margin:6px 0"><br>
+
+  <label>Birefringence e.g. 0.008</label><br>
+  <input id="cd-biref" type="number" step="0.001" placeholder="0.008" style="width:100%;padding:10px;border-radius:8px;margin:6px 0"><br>
+
+  <label>Fluorescence</label><br>
+  <select id="cd-fluor" style="width:100%;padding:10px;border-radius:8px;margin:6px 0">
+    <option value="">Select...</option>
+    <option>None / Inert</option>
+    <option>Weak Red</option>
+    <option>Strong Red</option>
+    <option>Blue</option>
+    <option>Green</option>
+    <option>Orange / Yellow</option>
+  </select><br>
+
+  <label>Colour</label><br>
+  <select id="cd-color" style="width:100%;padding:10px;border-radius:8px;margin:6px 0">
+    <option value="">Select...</option>
+    <option>Red / Pink</option>
+    <option>Blue</option>
+    <option>Green</option>
+    <option>Yellow / Orange</option>
+    <option>Purple</option>
+    <option>Colourless / White</option>
+    <option>Black / Brown</option>
+  </select><br>
+
+  <label>Crystal System</label><br>
+  <select id="cd-system" style="width:100%;padding:10px;border-radius:8px;margin:6px 0">
+    <option value="">Select...</option>
+    <option>Trigonal</option>
+    <option>Cubic / Isometric</option>
+    <option>Tetragonal</option>
+    <option>Hexagonal</option>
+    <option>Orthorhombic</option>
+    <option>Monoclinic</option>
+    <option>Triclinic</option>
+  </select><br>
+
+  <button onclick="cdIdentify()" style="width:100%;padding:12px;background:#22c55e;color:#000;font-weight:700;border:0;border-radius:10px;margin-top:10px">IDENTIFY GEM →</button>
+
+  <div id="cd-results" style="margin-top:14px"></div>
+</div>
+
+<script>
+const CD_GEMS = [
+  {name:"Ruby", ri:1.76, biref:0.008, fluor:"Strong Red", color:"Red / Pink", system:"Trigonal"},
+  {name:"Sapphire", ri:1.76, biref:0.008, fluor:"Strong Red", color:"Blue", system:"Trigonal"},
+  {name:"Emerald", ri:1.58, biref:0.006, fluor:"None / Inert", color:"Green", system:"Hexagonal"},
+  {name:"Diamond", ri:2.42, biref:0.000, fluor:"Blue", color:"Colourless / White", system:"Cubic / Isometric"},
+  {name:"Amethyst (Quartz)", ri:1.54, biref:0.009, fluor:"None / Inert", color:"Purple", system:"Trigonal"},
+  {name:"Topaz", ri:1.61, biref:0.010, fluor:"Orange / Yellow", color:"Yellow / Orange", system:"Orthorhombic"},
+  {name:"Garnet", ri:1.74, biref:0.000, fluor:"None / Inert", color:"Red / Pink", system:"Cubic / Isometric"},
+  {name:"Tourmaline", ri:1.62, biref:0.018, fluor:"None / Inert", color:"Green", system:"Trigonal"},
+  {name:"Aquamarine (Beryl)", ri:1.58, biref:0.006, fluor:"None / Inert", color:"Blue", system:"Hexagonal"},
+  {name:"Peridot", ri:1.65, biref:0.036, fluor:"None / Inert", color:"Green", system:"Orthorhombic"},
+];
+function cdIdentify(){
+  const ri = parseFloat(document.getElementById('cd-ri').value);
+  const biref = parseFloat(document.getElementById('cd-biref').value);
+  const fluor = document.getElementById('cd-fluor').value;
+  const color = document.getElementById('cd-color').value;
+  const system = document.getElementById('cd-system').value;
+  let scored = CD_GEMS.map(g=>{
+    let score = 0;
+    if(!isNaN(ri)) score += Math.max(0, 40 - Math.abs(g.ri - ri)*400);
+    if(!isNaN(biref)) score += Math.max(0, 25 - Math.abs(g.biref - biref)*500);
+    if(fluor && g.fluor===fluor) score += 15;
+    if(color && g.color===color) score += 10;
+    if(system && g.system===system) score += 10;
+    return {...g, score: Math.round(score)};
+  }).sort((a,b)=>b.score-a.score).slice(0,3);
+  document.getElementById('cd-results').innerHTML = scored.map((g,i)=>`
+    <div style="background:#1e293b;padding:12px;border-radius:10px;margin-top:8px">
+      <b>#${i+1} ${g.name} — ${g.score}% Match</b><br>
+      <span style="font-size:12px;opacity:.8">RI ${g.ri} | Biref ${g.biref} | ${g.fluor} | ${g.color} | ${g.system}</span>
+      <div style="height:6px;background:#334155;border-radius:99px;margin-top:6px"><div style="width:${g.score}%;height:6px;background:#22c55e;border-radius:99px"></div></div>
+    </div>`).join('');
+}
+</script>
+<!-- === END IDENTIFIER === -->
 </body>
 </html>
