@@ -764,26 +764,25 @@ const CD_GEMS = [
 {name:"Tunguska Meteorite",ri:1.60,biref:0.010,fluor:"None / Inert",color:"Black / Brown",system:"Orthorhombic"}
 ];
 function cdIdentify(){
-  const ri = parseFloat(document.getElementById('cd-ri').value);
-  const biref = parseFloat(document.getElementById('cd-biref').value);
-  const fluor = document.getElementById('cd-fluor').value;
-  const color = document.getElementById('cd-color').value;
-  const system = document.getElementById('cd-system').value;
-  let scored = CD_GEMS.map(g=>{
-    let score = 0;
-    if(!isNaN(ri)) score += Math.max(0, 40 - Math.abs(g.ri - ri)*400);
-    if(!isNaN(biref)) score += Math.max(0, 25 - Math.abs(g.biref - biref)*500);
-if(fluor && (g.fluor||"").toLowerCase().includes(fluor.split('/')[0].trim().toLowerCase())) score += 15;
-if(color && (g.color||"").toLowerCase().includes(color.split('/')[0].trim().toLowerCase())) score += 10;
-if(system && (g.system||"").toLowerCase().includes(system.toLowerCase())) score += 10;
-    return {...g, score: Math.round(score)};
-  }).sort((a,b)=>b.score-a.score).slice(0,3);
-  document.getElementById('cd-results').innerHTML = scored.map((g,i)=>`
-    <div style="background:#1e293b;padding:12px;border-radius:10px;margin-top:8px">
-      <b>#${i+1} ${g.name} — ${g.score}% Match</b><br>
-      <span style="font-size:12px;opacity:.8">RI ${g.ri} | Biref ${g.biref} | ${g.fluor} | ${g.color} | ${g.system}</span>
-      <div style="height:6px;background:#334155;border-radius:99px;margin-top:6px"><div style="width:${g.score}%;height:6px;background:#22c55e;border-radius:99px"></div></div>
-    </div>`).join('');
+ const ri = parseFloat(document.getElementById('cd-ri').value);
+ const biref = parseFloat(document.getElementById('cd-biref').value);
+ const fluor = document.getElementById('cd-fluor').value;
+ const color = document.getElementById('cd-color').value;
+ const system = document.getElementById('cd-system').value;
+ let scored = CD_GEMS.map(function(g){
+  let score = 0;
+  if(!isNaN(ri)) score += Math.max(0, 40 - Math.abs(g.ri - ri)*200);
+  if(!isNaN(biref)) score += Math.max(0, 25 - Math.abs((g.biref||0) - biref)*500);
+  if(fluor && (g.fluor||"").toLowerCase().includes(fluor.toLowerCase())) score += 15;
+  if(color && (g.color||"").toLowerCase().includes(color.toLowerCase())) score += 10;
+  if(system && (g.system||"").toLowerCase().includes(system.toLowerCase())) score += 10;
+  return {name:g.name, ri:g.ri, score:Math.round(score)};
+ });
+ scored.sort(function(a,b){ return b.score - a.score; });
+ scored = scored.slice(0,3);
+ let html = "";
+ for(let i=0;i<scored.length;i++){ html += "<div style='background:#1e293b;padding:12px;border-radius:10px;margin-top:8px'><b>#"+(i+1)+" "+scored[i].name+" - "+scored[i].score+"% Match</b><br><span style='font-size:12px;opacity:.8'>RI "+scored[i].ri+"</span></div>"; }
+ document.getElementById('cd-results').innerHTML = html;
 }
 </script>
 <!-- === END IDENTIFIER === -->
