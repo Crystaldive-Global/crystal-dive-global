@@ -91,6 +91,15 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:24px;line-hei
 <label>Hardness (optional)</label><input id="idHard" type="number" step="0.1" placeholder="e.g. 7">
 <button class="btn" onclick="identify()">Identify →</button>
 <div id="idResult"></div>
+  <div class="card"><h3>💎 Advanced Gem Identifier - CD Tool</h3>
+<label>Refractive Index RI</label><input id="cd-ri" type="number" step="0.001" placeholder="e.g. 1.60">
+<label>Birefringence</label><input id="cd-biref" type="number" step="0.001" placeholder="e.g. 0.008">
+<label>Fluorescence</label><input id="cd-fluor" placeholder="e.g. None / Blue">
+<label>Colour</label><input id="cd-color" placeholder="e.g. Blue">
+<label>Crystal System</label><input id="cd-system" placeholder="e.g. Hexagonal">
+<button class="btn" onclick="cdIdentify()">IDENTIFY GEM</button>
+<div id="cd-results"></div>
+</div>
 </div>
 </section>
 
