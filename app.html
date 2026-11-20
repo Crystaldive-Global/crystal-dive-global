@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+u<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crystal Dive Global - Gemological Standard SG Tester</title>
 <style>
 :root{--bg:#070A12;--card:rgba(255,255,255,.06);--gold:#D4AF6A;--gold2:#F3D9A0;--text:#F5F1E8;--muted:#9AA3B2;--line:rgba(212,175,106,.28)}
@@ -773,9 +773,9 @@ function cdIdentify(){
     let score = 0;
     if(!isNaN(ri)) score += Math.max(0, 40 - Math.abs(g.ri - ri)*400);
     if(!isNaN(biref)) score += Math.max(0, 25 - Math.abs(g.biref - biref)*500);
-    if(fluor && g.fluor===fluor) score += 15;
-    if(color && g.color===color) score += 10;
-    if(system && g.system===system) score += 10;
+    if(fluor && g.fluor.toLowerCase().includes(fluor.split('/')[0].trim().toLowerCase()))
+if(color && g.color.toLowerCase().includes(color.split('/')[0].trim().toLowerCase()))
+if(system && g.system.toLowerCase().includes(system.toLowerCase()))
     return {...g, score: Math.round(score)};
   }).sort((a,b)=>b.score-a.score).slice(0,3);
   document.getElementById('cd-results').innerHTML = scored.map((g,i)=>`
@@ -787,6 +787,5 @@ function cdIdentify(){
 }
 </script>
 <!-- === END IDENTIFIER === -->
-<script src="gems-database.js"></script>
 </body>
 </html>
