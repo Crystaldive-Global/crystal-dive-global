@@ -773,9 +773,9 @@ function cdIdentify(){
     let score = 0;
     if(!isNaN(ri)) score += Math.max(0, 40 - Math.abs(g.ri - ri)*400);
     if(!isNaN(biref)) score += Math.max(0, 25 - Math.abs(g.biref - biref)*500);
-    if(fluor && g.fluor.toLowerCase().includes(fluor.split('/')[0].trim().toLowerCase()))
-if(color && g.color.toLowerCase().includes(color.split('/')[0].trim().toLowerCase()))
-if(system && g.system.toLowerCase().includes(system.toLowerCase()))
+if(fluor && g.fluor.toLowerCase().includes(fluor.split('/')[0].trim().toLowerCase())) score += 15;
+if(color && g.color.toLowerCase().includes(color.split('/')[0].trim().toLowerCase())) score += 10;
+if(system && g.system.toLowerCase().includes(system.toLowerCase())) score += 10;
     return {...g, score: Math.round(score)};
   }).sort((a,b)=>b.score-a.score).slice(0,3);
   document.getElementById('cd-results').innerHTML = scored.map((g,i)=>`
