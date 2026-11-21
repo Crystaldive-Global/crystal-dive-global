@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crystal Dive Global - Gemological Standard SG Tester</title>
+<style>
+:root{--bg:#070A12;--card:rgba(255,255,255,.06);--gold:#D4AF6A;--gold2:#F3D9A0;--text:#F5F1E8;--muted:#9AA3B2;--line:rgba(212,175,106,.28)}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(900px 500px at 20% 0%,#1A2340 0%,#070A12 55%),#070A12;color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{position:sticky;top:0;z-index:10;background:rgba(7,10,18,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:16px 18px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;letter-spacing:.18em;font-size:18px}.logo span{color:var(--gold)}
+.tag{font-size:11px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-top:2px}
+.badge{border:1px solid var(--gold);color:var(--gold2);padding:6px 10px;border-radius:999px;font-size:11px;letter-spacing:.12em}
+.wrap{max-width:1080px;margin:0 auto;padding:18px}
+.hero{background:linear-gradient(135deg,#151B2E,#0B0F1A);border:1px solid var(--line);border-radius:24px;padding:22px}
+.hero h1{font-size:34px;line-height:1.05;margin:8px 0}.hero h1 i{color:var(--gold);font-style:normal}
+.hero p{color:var(--muted);line-height:1.6}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-top:12px}
+.card h3{margin:6px 0 6px}.card p{color:var(--muted);font-size:14px;line-height:1.55;margin:0}
+.btn{display:inline-block;margin-top:12px;background:linear-gradient(180deg,#F3D9A0,#D4AF6A);color:#1A1405;font-weight:800;padding:11px 16px;border-radius:999px;border:0;cursor:pointer;text-decoration:none;font-size:14px}
+.btn.ghost{background:transparent;color:var(--gold2);border:1px solid var(--gold)}
+input,select{width:100%;background:#0D1220;border:1px solid var(--line);color:var(--text);padding:12px 13px;border-radius:12px;margin:6px 0}
+label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.result{background:#0B1220;border:1px solid var(--gold);border-radius:16px;padding:16px;margin-top:12px}
+.big{font-size:44px;font-weight:900;color:var(--gold2);line-height:1}
+.mini{font-size:12px;color:var(--muted)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.tabs button{background:#11182A;color:#fff;border:1px solid var(--line);padding:10px 14px;border-radius:999px;cursor:pointer}.tabs button.active{background:var(--gold);color:#1A1405;font-weight:800}
+section{display:none} section.active{display:block}
+footer{color:var(--muted);font-size:12px;text-align:center;padding:24px;line-height:1.7}
+.check{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.warn{color:#FFB86B}.ok{color:#7BE9A8}
+</style>
+</head>
+<body>
+<header><div><div class="logo">CRYSTAL<span>DIVE</span> GLOBAL</div><div class="tag">Gemological Standard • Hydrostatic SG • GIA Method</div></div><div class="badge">VERSION 1.0 • STANDARD</div></header>
+<div class="wrap">
+<div class="hero">
+<div style="color:var(--gold);font-size:12px;letter-spacing:.18em">✦ GEMOLOGICAL STANDARD INSTRUMENT ✦</div>
+<h1>Test Specific Gravity.<br><i>Identify With Confidence.</i></h1>
+<p>Real water density table • Thread correction • Calibration check • Double measurement • Proper metal extraction • SG is a guide, not a lab certificate.</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" onclick="show('sg')">Start SG Test →</button><button class="btn ghost" onclick="show('library')">Browse Library</button><a class="btn ghost" href="https://your-website.com" target="_blank">🌐 Visit Our Web Page</a></div>
+<div style="display:flex;gap:18px;margin-top:16px;flex-wrap:wrap"><div><b id="countLabel">-- Gemstones</b><div class="mini">All Gemstones Library</div></div><div><b>±0.02 SG</b><div class="mini">Standard Tolerance</div></div><div><b>Real Density Table</b><div class="mini">Water Temp Corrected</div></div></div>
+</div>
+<div class="tabs">
+<button onclick="show('sg')" id="t-sg" class="active">💎 Crystal SG Test</button>
+<button onclick="show('jewelry')" id="t-jewelry">💍 Jewelry SG Test</button>
+<button onclick="show('identify')" id="t-identify">🔍 Identify By SG</button>
+<button onclick="show('library')" id="t-library">📚 Crystal Library</button>
+<button onclick="show('camera')" id="t-camera">📷 Camera Scan</button>
+<button onclick="show('collection')" id="t-collection">🗂️ My Collection</button>
+<button onclick="show('checklist')" id="t-checklist">✅ Fake vs Real</button>
+<button onclick="show('guide')" id="t-guide">📖 Guide & FAQ</button>
+<button onclick="show('about')" id="t-about">ℹ️ About • Legal • Contact</button>
+</div>
+<section id="sg" class="active">
+<div class="card"><h3>💎 Crystal SG Test - Gemological Standard</h3><p>Zero scale • Weigh in air • Hang with thin thread, fully in distilled water, not touching container • Remove bubbles • Weigh in water • Repeat second time.</p>
+<label>Calibration Weight You Used (g) - e.g. 10.00</label><input id="calStd" type="number" step="0.01" placeholder="10.00">
+<label>What Scale Showed For Calibration Weight (g)</label><input id="calShow" type="number" step="0.01" placeholder="10.00">
+<label>Thread Weight In Water (g) - weigh empty thread in water, usually 0.01 to 0.05</label><input id="threadW" type="number" step="0.001" value="0.02">
+<label>Water Temperature °C</label><input id="temp" type="number" value="20" step="0.5">
+<label>Measurement One - Weight in Air (g)</label><input id="air1" type="number" step="0.01" placeholder="e.g. 12.50">
+<label>Measurement One - Weight in Water (g)</label><input id="water1" type="number" step="0.01" placeholder="e.g. 7.80">
+<label>Measurement Two - Weight in Air (g)</label><input id="air2" type="number" step="0.01" placeholder="Repeat test">
+<label>Measurement Two - Weight in Water (g)</label><input id="water2" type="number" step="0.01" placeholder="Repeat test">
+<label>Stone Name / Note</label><input id="note" placeholder="e.g. Purple stone from supplier">
+<button class="btn" onclick="calcSG()">Calculate Standard SG →</button>
+<div id="sgResult"></div>
+<button class="btn ghost" onclick="saveResult()">💾 Save Test Result</button>
+</div>
+</section>
+<section id="jewelry">
+<div class="card"><h3>💍 Jewelry SG Test - Proper Metal Extraction</h3><p>Standard method: Total volume minus stone volume = metal volume. Metal SG = Metal weight / Metal volume. Select stone type so we use its true SG.</p>
+<label>Total Weight in Air (g)</label><input id="jAir" type="number" step="0.01" placeholder="e.g. 8.40">
+<label>Total Weight in Water (g) - jewelry + thread corrected</label><input id="jWater" type="number" step="0.01" placeholder="e.g. 7.70">
+<label>Thread Weight In Water (g)</label><input id="jThread" type="number" step="0.001" value="0.02">
+<label>Water Temperature °C</label><input id="jTemp" type="number" value="20">
+<label>Stone Weight Estimate (g) - 0 if no stone</label><input id="jStone" type="number" step="0.01" value="0">
+<label>Stone Type - For Stone SG</label><select id="jStoneType"><option value="0">No Stone</option><option value="3.52">Diamond - 3.52</option><option value="4.00">Ruby / Sapphire - 4.00</option><option value="2.72">Emerald - 2.72</option><option value="2.65">Quartz / Amethyst - 2.65</option><option value="3.14">Tourmaline - 3.14</option><option value="4.15">Garnet - 4.15</option><option value="3.54">Topaz - 3.54</option><option value="2.70">Pearl / Coral - 2.70</option><option value="2.08">Opal - 2.08</option></select>
+<button class="btn" onclick="calcJewelry()">Calculate Jewelry SG →</button>
+<div id="jResult"></div>
+</div>
+</section>
+<section id="identify">
+<div class="card"><h3>🔍 Identify Tool - Identify By SG</h3><p>Enter SG. Matches across all gemstones with tolerance, ranked by confidence.</p>
+<label>Your Measured SG</label><input id="idSG" type="number" step="0.01" placeholder="e.g. 2.65">
+<label>Colour (optional)</label><input id="idColor" placeholder="e.g. purple">
+<label>Hardness (optional)</label><input id="idHard" type="number" step="0.1" placeholder="e.g. 7">
+<button class="btn" onclick="identify()">Identify →</button>
+<div id="idResult"></div>
+</div>
+</section>
+<section id="library">
+<div class="card"><h3>📚 Crystal Library - All Gemstones</h3><p>Full gemstone library built inside app. Search by name. No external file needed.</p>
+<input id="search" placeholder="Search gemstone... e.g. Quartz, Diamond, Tourmaline" oninput="renderLibrary()">
+<select id="catFilter" onchange="renderLibrary()"><option value="">All Categories</option><option>Gemstone</option></select>
+<div id="libList"></div>
+</div>
+</section>
+<section id="camera">
+<div class="card"><h3>📷 Camera Scan</h3><p>Camera is for visual reference only. SG test is required for identification. Visual alone cannot confirm authenticity.</p>
+<input type="file" accept="image/*" capture="environment" onchange="previewImg(event)">
+<div id="preview"></div>
+<p class="mini">Tip: Daylight, white background, next to scale. Then do SG test for real result.</p>
+</div>
+</section>
+<section id="collection">
+<div class="card"><h3>🗂️ My Collection + Saved Results</h3><p>Saved on this device only. No account needed. Privacy-first.</p>
+<div id="savedList"></div><button class="btn ghost" onclick="clearSaved()">Clear All</button>
+</div>
+</section>
+<section id="checklist">
+<div class="card"><h3>✅ Fake vs Real Checklist</h3><div id="checks"></div><div id="checkScore" class="result"></div></div>
+</section>
+<section id="guide">
+<div class="card"><h3>📖 How To Do SG Test Guide - Standard Method</h3><p>Zero scale with calibration weight • Use 0.01g scale • Use distilled water • Measure water temperature • Use thin thread, weigh thread in water separately • Stone fully submerged, not touching sides or bottom • Remove all bubbles with soft brush • Weigh air, then water • Repeat second time • If two SG results differ by more than 0.05, re-test • SG = Air / (Air - Water corrected for thread and water density)</p></div>
+<div class="card"><h3>❓ FAQ + ⚖️ How To Weigh Correctly</h3><p><b>Why is SG different each time?</b> Bubbles, temperature, thread weight, touching container.<br><b>Can SG prove real diamond?</b> No alone. SG + hardness + thermal test + lab certificate.<br><b>Do I need lab?</b> For high value stones, yes - GIA / IGI lab.</p></div>
+</section>
+<section id="about">
+<div class="card"><h3>ℹ️ About Crystal Dive</h3><p>Crystal Dive Global is a premium gemological aid for collectors, jewelers and buyers. Uses hydrostatic SG method and gemological data to give a guide, not a certificate.</p><p><b>📱 App Version 1.0</b><br><a href="https://your-website.com" target="_blank" class="btn ghost">🌐 Visit Our Web Page</a> <a href="https://your-website.com" target="_blank" class="btn ghost">📞 Contact - Goes to Web Page</a> <button class="btn ghost" onclick="shareApp()">📤 Share App</button></p></div>
+<div class="card"><h3>🔒 Privacy Policy</h3><p>We do not collect personal data. Tests stored only on your device. Photos not uploaded. No email in app.</p><h3>📜 Terms of Use</h3><p>Use for educational and guide purposes. You are responsible for buying decisions.</p><h3>⚠️ Disclaimer</h3><p>SG is a guide, not a lab certificate. For legal or high-value decisions, use a certified gemological laboratory.</p></div>
+</section>
+</div>
+<footer>Crystal Dive Global • Gemological Standard Aid • SG is a guide, not a lab certificate • <a href="https://your-website.com" style="color:var(--gold)">Visit Our Web Page</a></footer>
+
+<!-- === ADVANCED IDENTIFIER - ONLY ONE COPY, NO DUPLICATE IDs === -->
+<div id="cd-identifier" style="padding:16px;margin:16px auto;max-width:1080px;background:#0f172a;color:#fff;border-radius:16px;font-family:sans-serif">
+<h2 style="margin:0 0 8px">🔍 Advanced Gem Identifier</h2>
+<p style="opacity:.8;font-size:13px">Enter what you measured. We rank the closest matches.</p>
+<label>Refractive Index (RI) e.g. 1.76</label><input id="cd-ri" type="number" step="0.001" placeholder="1.76" style="width:100%;padding:10px;border-radius:8px;margin:6px 0">
+<label>Birefringence e.g. 0.008</label><input id="cd-biref" type="number" step="0.001" placeholder="0.008" style="width:100%;padding:10px;border-radius:8px;margin:6px 0">
+<label>Fluorescence</label><select id="cd-fluor" style="width:100%;padding:10px;border-radius:8px;margin:6px 0"><option value="">Select...</option><option>None / Inert</option><option>Weak Red</option><option>Strong Red</option><option>Blue</option><option>Green</option><option>Orange / Yellow</option></select>
+<label>Colour</label><select id="cd-color" style="width:100%;padding:10px;border-radius:8px;margin:6px 0"><option value="">Select...</option><option>Red / Pink</option><option>Blue</option><option>Green</option><option>Yellow / Orange</option><option>Purple</option><option>Colourless / White</option><option>Black / Brown</option></select>
+<label>Crystal System</label><select id="cd-system" style="width:100%;padding:10px;border-radius:8px;margin:6px 0"><option value="">Select...</option><option>Trigonal</option><option>Cubic / Isometric</option><option>Tetragonal</option><option>Hexagonal</option><option>Orthorhombic</option><option>Monoclinic</option><option>Triclinic</option></select>
+<button onclick="cdIdentify()" style="width:100%;padding:12px;background:#22c55e;color:#000;font-weight:700;border:0;border-radius:10px;margin-top:10px">IDENTIFY GEM →</button>
+<div id="cd-results" style="margin-top:14px"></div>
+</div>
+
+<script>
+const DENSITY_TABLE=[[0,0.99984],[5,0.99996],[10,0.99970],[15,0.99910],[20,0.99820],[25,0.99704],[30,0.99565],[35,0.99403],[40,0.99221]];
+function waterDensity(t){if(t<=0) return 0.99984; if(t>=40) return 0.99221; for(let i=0;i<DENSITY_TABLE.length-1;i++){let a=DENSITY_TABLE[i],b=DENSITY_TABLE[i+1]; if(t>=a[0]&&t<=b[0]){let f=(t-a[0])/(b[0]-a[0]); return a[1]+f*(b[1]-a[1]);}} return 0.9982;}
+function sgFromWeights(air,water,threadW,temp){let waterCorr=water-threadW; if(air<=waterCorr) return null; let raw=air/(air-waterCorr); return raw*waterDensity(temp);}
+const RAW=[
+"Diamond|3.51|3.53|10|Colorless, Yellow, Pink, Blue|C","Ruby|3.97|4.05|9|Red|Al2O3","Sapphire Blue|3.95|4.03|9|Blue|Al2O3","Sapphire Pink|3.95|4.03|9|Pink|Al2O3","Sapphire Yellow|3.95|4.03|9|Yellow|Al2O3","Sapphire Padparadscha|3.95|4.03|9|Pink-Orange|Al2O3","Sapphire Star|3.95|4.03|9|Blue Star|Al2O3","Ruby Star|3.97|4.05|9|Red Star|Al2O3","Emerald|2.67|2.78|7.5|Green|Be3Al2Si6O18","Aquamarine|2.67|2.75|7.5|Blue|Be3Al2Si6O18","Morganite|2.80|2.90|7.5|Pink, Peach|Be3Al2Si6O18","Heliodor|2.68|2.80|7.5|Yellow|Be3Al2Si6O18","Goshenite|2.65|2.75|7.5|Colorless|Be3Al2Si6O18","Bixbite Red Beryl|2.66|2.70|7.5|Red|Be3Al2Si6O18","Alexandrite|3.68|3.78|8.5|Green to Red Change|BeAl2O4","Chrysoberyl|3.68|3.78|8.5|Yellow, Green|BeAl2O4","Cat's Eye Chrysoberyl|3.68|3.78|8.5|Yellow-Green Chatoyant|BeAl2O4","Topaz|3.53|3.56|8|Colorless, Blue, Yellow, Pink|Al2SiO4(F,OH)2","Imperial Topaz|3.53|3.56|8|Orange-Pink|Al2SiO4(F,OH)2","Tourmaline Rubellite|3.02|3.26|7.5|Pink, Red|Borosilicate","Tourmaline Verdelite|3.02|3.26|7.5|Green|Borosilicate","Tourmaline Indicolite|3.02|3.26|7.5|Blue|Borosilicate","Tourmaline Paraiba|3.02|3.26|7.5|Neon Blue-Green|Borosilicate","Tourmaline Watermelon|3.02|3.26|7.5|Pink-Green|Borosilicate","Tourmaline Black|3.02|3.26|7.5|Black|Borosilicate","Garnet Almandine|4.05|4.32|7.5|Deep Red|Fe3Al2(SiO4)3","Garnet Pyrope|3.62|3.87|7.5|Red|Mg3Al2(SiO4)3","Garnet Rhodolite|3.83|3.93|7.5|Purplish Red|(Mg,Fe)3Al2(SiO4)3","Garnet Spessartine|4.12|4.22|7.5|Orange|Mn3Al2(SiO4)3","Garnet Grossular|3.59|3.68|7.5|Green, Yellow|Ca3Al2(SiO4)3","Garnet Tsavorite|3.59|3.68|7.5|Bright Green|Ca3Al2(SiO4)3","Garnet Hessonite|3.59|3.68|7.5|Orange-Brown|Ca3Al2(SiO4)3","Garnet Andradite|3.70|3.88|7|Yellow-Green|Ca3Fe2(SiO4)3","Garnet Demantoid|3.82|3.88|7|Green|Ca3Fe2(SiO4)3","Garnet Uvarovite|3.77|3.83|7.5|Emerald Green|Ca3Cr2(SiO4)3","Peridot|3.27|3.37|6.5|Olive Green|(Mg,Fe)2SiO4","Quartz Rock Crystal|2.65|2.66|7|Colorless|SiO2","Amethyst|2.65|2.66|7|Purple|SiO2","Citrine|2.65|2.66|7|Yellow, Orange|SiO2","Smoky Quartz|2.65|2.66|7|Brown, Smoky|SiO2","Rose Quartz|2.65|2.66|7|Pink|SiO2","Ametrine|2.65|2.66|7|Purple-Yellow|SiO2","Prasiolite|2.65|2.66|7|Green|SiO2","Chalcedony|2.58|2.64|7|White, Blue, Grey|SiO2","Agate|2.58|2.64|7|Banded Multi|SiO2","Onyx Black|2.58|2.64|7|Black|SiO2","Carnelian|2.58|2.64|7|Orange-Red|SiO2","Sardonyx|2.58|2.64|7|Red-White Banded|SiO2","Jasper|2.58|2.64|7|Red, Yellow, Green|SiO2","Bloodstone|2.58|2.64|7|Green with Red Spots|SiO2","Chrysoprase|2.58|2.64|7|Apple Green|SiO2","Tiger's Eye|2.64|2.71|7|Golden Brown Chatoyant|SiO2","Hawk's Eye|2.64|2.71|7|Blue-Grey Chatoyant|SiO2","Aventurine|2.64|2.69|7|Green Sparkle|SiO2","Opal White|1.98|2.20|5.5|White Play of Color|SiO2·nH2O","Opal Black|1.98|2.20|5.5|Black Play of Color|SiO2·nH2O","Opal Fire|1.98|2.20|5.5|Orange-Red|SiO2·nH2O","Opal Boulder|1.98|2.20|5.5|Blue-Green in Ironstone|SiO2·nH2O","Opal Ethiopian|1.98|2.20|5.5|White, Crystal|SiO2·nH2O","Opal Pink|1.98|2.20|5.5|Pink|SiO2·nH2O","Opal Blue Peruvian|1.98|2.20|5.5|Blue|SiO2·nH2O","Jadeite|3.30|3.38|7|Green, White, Lavender|NaAlSi2O6","Nephrite|2.95|3.05|6.5|Green, White, Black|Ca2(Mg,Fe)5Si8O22(OH)2","Lapis Lazuli|2.38|2.45|5.5|Deep Blue with Gold|Na-Ca Aluminosilicate","Turquoise|2.60|2.90|5.5|Blue-Green|CuAl6(PO4)4(OH)8·4H2O","Malachite|3.95|4.05|3.5|Green Banded|Cu2CO3(OH)2","Azurite|3.77|3.89|3.5|Deep Blue|Cu3(CO3)2(OH)2","Fluorite|3.18|3.18|4|Purple, Green, Blue, Yellow|CaF2","Calcite|2.71|2.71|3|White, Yellow, Blue|CaCO3","Rhodochrosite|3.60|3.70|4|Pink Banded|MnCO3","Rhodonite|3.57|3.68|5.5|Pink with Black Veins|MnSiO3","Sodalite|2.27|2.33|6|Blue with White|Na8Al6Si6O24Cl2","Hematite|5.15|5.15|6|Black, Steel Grey|Fe2O3","Pyrite|4.90|5.20|6.5|Gold Metallic|FeS2","Moonstone|2.56|2.60|6|White, Peach, Blue Sheen|KAlSi3O8","Rainbow Moonstone|2.56|2.60|6|White Blue Flash|(Ca,Na)Al2Si2O8","Labradorite|2.68|2.72|6.5|Grey Blue-Green Flash|(Ca,Na)Al2Si2O8","Sunstone|2.64|2.68|6.5|Orange Sparkle|(Ca,Na)Al2Si2O8","Amazonite|2.56|2.58|6|Blue-Green|KAlSi3O8","Zircon|4.65|4.75|7.5|Blue, Colorless, Red|ZrSiO4","Spinel|3.58|3.62|8|Red, Pink, Blue, Black|MgAl2O4","Spinel Cobalt Blue|3.58|3.62|8|Intense Blue|MgAl2O4","Tanzanite|3.35|3.38|6.5|Blue-Violet|Ca2Al3(SiO4)3(OH)","Iolite|2.58|2.66|7.5|Violet-Blue|Mg2Al4Si5O18","Kunzite|3.15|3.21|7|Pink, Lilac|LiAlSi2O6","Hiddenite|3.15|3.21|7|Green|LiAlSi2O6","Apatite|3.16|3.22|5|Blue, Green, Yellow|Ca5(PO4)3(F,Cl,OH)","Diopside|3.28|3.35|6|Green|CaMgSi2O6","Chrome Diopside|3.28|3.35|6|Intense Green|CaMgSi2O6","Serpentine Jade|2.50|2.60|4|Green, Yellow|Mg3Si2O5(OH)4","Pearl Freshwater|2.68|2.78|3|White, Pink|CaCO3","Pearl Akoya|2.68|2.78|3|White, Cream|CaCO3","Pearl South Sea|2.68|2.78|3|White, Gold|CaCO3","Pearl Tahitian Black|2.68|2.78|3|Black, Grey|CaCO3","Coral Red|2.60|2.70|3.5|Red, Pink|CaCO3","Coral White|2.60|2.70|3.5|White|CaCO3","Amber|1.05|1.10|2.5|Yellow, Orange, Honey|C10H16O","Jet|1.30|1.35|2.5|Black|C","Howlite|2.53|2.59|3.5|White Grey Veins|Ca2B5SiO9(OH)5","Obsidian|2.30|2.60|5.5|Black, Mahogany|Volcanic Glass","Moldavite|2.32|2.38|5.5|Green Glassy|SiO2+Al2O3","Larimar|2.70|2.80|5|Light Blue White|Ca2NaHSi3O9","Charoite|2.54|2.68|5.5|Purple Swirl|K(Ca,Na)2Si4O10(OH,F)","Sugilite|2.74|2.80|6|Purple, Magenta|KNa2(Fe,Mn,Al)2Li3Si12O30","Kyanite|3.55|3.67|5|Blue, Green|Al2SiO5","Andalusite|3.13|3.16|7.5|Brown, Green Pleochroic|Al2SiO5","Epidote|3.38|3.49|6.5|Green|Ca2(Fe,Al)3(SiO4)3(OH)","Prehnite|2.80|2.95|6.5|Yellow-Green|Ca2Al2Si3O10(OH)2","Dioptase|3.28|3.38|5|Emerald Green|CuSiO3·H2O","Chrysocolla|2.00|2.30|2.5|Blue-Green|Cu2H2Si2O5(OH)4","Smithsonite|4.30|4.50|5|Pink, Blue, Green|ZnCO3","Wulfenite|6.50|7.00|3|Orange, Yellow|PbMoO4","Barite|4.30|4.50|3.5|White, Blue, Yellow|BaSO4","Celestite|3.95|3.98|3.5|Sky Blue|SrSO4","Euclase|3.05|3.10|7.5|Blue, Colorless|BeAlSiO4(OH)","Phenakite|2.95|3.00|7.5|Colorless, Yellow|Be2SiO4","Danburite|2.97|3.03|7|Colorless, Yellow, Pink|CaB2Si2O8","Scapolite|2.57|2.68|6|Yellow, Pink, Violet|(Na,Ca)4Al3Si9O24Cl","Sphene Titanite|3.52|3.54|5.5|Green, Yellow, Brown|CaTiSiO5","Cassiterite|6.80|7.10|7|Brown, Black, Red|SnO2","Rutile|4.20|4.30|6.5|Red, Brown, Black|TiO2","Benitoite|3.64|3.68|6.5|Blue|BaTiSi3O9","Taaffeite|3.60|3.61|8|Mauve, Pink|Mg3Al8BeO16","Musgravite|3.60|3.65|8|Olive Green|Be(Mg,Fe,Zn)2Al6O12","Grandidierite|2.90|3.00|7.5|Blue-Green|(Mg,Fe)Al3(BO4)(SiO4)O2","Painite|4.00|4.05|8|Brown-Red|CaZrAl9O15(BO3)","Moissanite|3.21|3.22|9.25|Colorless, Yellow|SiC","Cubic Zirconia|5.60|6.00|8.5|Colorless, All Colors|ZrO2","Glass Fake Gem|2.40|2.80|5.5|All Colors|Glass","Plastic Fake Gem|1.05|1.20|2|All Colors|Plastic"
+];
+const MINERALS = RAW.map(r=>{let p=r.split('|'); return {name:p[0],sg_min:+p[1],sg_max:+p[2],hardness:+p[3],color:p[4],category:'Gemstone',formula:p[5]};});
+document.getElementById('countLabel').textContent = MINERALS.length + ' Gemstones';
+function show(id){document.querySelectorAll('section').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active')); let btn=document.getElementById('t-'+id); if(btn) btn.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'});}
+function findMatches(sg){return MINERALS.map(m=>{let mid=(m.sg_min+m.sg_max)/2; let diff=Math.abs(sg-mid); let conf=diff<0.03?'High Confidence':diff<0.08?'Medium Confidence':'Low Confidence'; return {...m,diff,confidence:conf};}).filter(m=>m.diff<0.15).sort((a,b)=>a.diff-b.diff);}
+function calcSG(){let calStd=parseFloat(document.getElementById('calStd').value), calShow=parseFloat(document.getElementById('calShow').value); let thread=parseFloat(document.getElementById('threadW').value||0), temp=parseFloat(document.getElementById('temp').value||20); let a1=parseFloat(document.getElementById('air1').value), w1=parseFloat(document.getElementById('water1').value), a2=parseFloat(document.getElementById('air2').value), w2=parseFloat(document.getElementById('water2').value); if(!a1||!w1) return document.getElementById('sgResult').innerHTML='<p>Enter Measurement One weights.</p>'; let calMsg=''; let calFactor=1; if(calStd&&calShow){let err=Math.abs(calShow-calStd); calFactor=calStd/calShow; if(err>0.02) calMsg=`<p class="warn">⚠️ Calibration Error: ${err.toFixed(2)}g - Re-zero scale. Correction applied.</p>`; else calMsg=`<p class="ok">✓ Calibration OK - Error ${err.toFixed(2)}g</p>`;} let sg1=sgFromWeights(a1*calFactor,w1*calFactor,thread,temp); let sg2=(a2&&w2)?sgFromWeights(a2*calFactor,w2*calFactor,thread,temp):null; if(!sg1) return document.getElementById('sgResult').innerHTML='<p>Air must be greater than water after thread correction.</p>'; let finalSG=sg2?(sg1+sg2)/2:sg1; let diffMsg=sg2?(Math.abs(sg1-sg2)>0.05?`<p class="warn">⚠️ Repeat difference ${Math.abs(sg1-sg2).toFixed(3)} - More than 0.05 - Re-test required</p>`:`<p class="ok">✓ Repeat OK - Difference ${Math.abs(sg1-sg2).toFixed(3)}</p>`):`<p class="mini">Do second measurement for standard accuracy.</p>`; window._lastSG=finalSG; window._lastNote=document.getElementById('note').value; let match=findMatches(finalSG).slice(0,3).map(m=>`<b>${m.name}</b> (${m.sg_min}-${m.sg_max}) - ${m.confidence}`).join('<br>'); document.getElementById('sgResult').innerHTML=`${calMsg}<div class="mini">STANDARD SG • Water Density ${waterDensity(temp).toFixed(4)} at ${temp}°C • Thread ${thread}g • Tolerance ±0.02</div><div class="big">${finalSG.toFixed(2)}</div><p>Measurement One SG: ${sg1.toFixed(3)} ${sg2?`• Measurement Two SG: ${sg2.toFixed(3)} • Average: ${finalSG.toFixed(3)}`:''}</p>${diffMsg}<p>Closest matches:</p><p>${match||'No close match - rare or composite'}</p><p class="mini">SG is a guide, not a lab certificate.</p>`;}
+function calcJewelry(){let a=parseFloat(document.getElementById('jAir').value), w=parseFloat(document.getElementById('jWater').value), thread=parseFloat(document.getElementById('jThread').value||0), temp=parseFloat(document.getElementById('jTemp').value||20), stoneW=parseFloat(document.getElementById('jStone').value||0), stoneSG=parseFloat(document.getElementById('jStoneType').value||0); if(!a||!w) return document.getElementById('jResult').innerHTML='<p>Enter weights.</p>'; let metalW=a-stoneW; if(metalW<=0) return document.getElementById('jResult').innerHTML='<p>Stone weight cannot exceed total.</p>'; let totalVol=(a-(w-thread))/waterDensity(temp); let stoneVol=stoneSG?stoneW/stoneSG:0; let metalVol=totalVol-stoneVol; if(metalVol<=0) return document.getElementById('jResult').innerHTML='<p>Stone volume too large - check stone weight / SG.</p>'; let metalSG=metalW/metalVol; let totalSG=sgFromWeights(a,w,thread,temp); let karat=metalSG>19?'22K-24K Gold (SG ~19-19.3)':metalSG>17?'18K Gold (SG ~15-17) - Check acid':metalSG>14?'14K Gold (SG ~13-14)':metalSG>12?'12K / Platinum Mix':metalSG>10.3?'Sterling Silver / 10K (SG ~10.3-10.5)':metalSG>9?'Silver Plated / Low Purity':'Check - May be Plated / Fake'; document.getElementById('jResult').innerHTML=`<div class="mini">STANDARD JEWELRY SG • Total SG ${totalSG.toFixed(2)} • Metal SG ${metalSG.toFixed(2)}</div><div class="big">${metalSG.toFixed(2)}</div><p><b>Estimated Metal:</b> ${karat}</p><p><b>Metal Weight:</b> ${metalW.toFixed(2)}g • <b>Metal Volume:</b> ${metalVol.toFixed(3)} cm³ • <b>Stone Volume Removed:</b> ${stoneVol.toFixed(3)} cm³</p><p class="mini">For final purity, use acid / XRF + lab. SG is a guide.</p>`; window._lastSG=metalSG;}
+function identify(){let sg=parseFloat(document.getElementById('idSG').value); if(!sg) return document.getElementById('idResult').innerHTML='<p>Enter SG.</p>'; let col=document.getElementById('idColor').value.toLowerCase(); let hard=parseFloat(document.getElementById('idHard').value); let res=findMatches(sg).filter(m=>(!col||m.color.toLowerCase().includes(col))&&(!hard||Math.abs(m.hardness-hard)<1)); if(!res.length) res=findMatches(sg); document.getElementById('idResult').innerHTML=res.slice(0,8).map(m=>`<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)"><b>${m.name}</b> • SG ${m.sg_min}-${m.sg_max} • Hardness ${m.hardness} • ${m.color}<br><span class="mini">${m.formula} • ${m.confidence}</span></div>`).join('')||'<p>No match.</p>';}
+function renderLibrary(){let q=(document.getElementById('search').value||'').toLowerCase(); let list=MINERALS.filter(m=>!q||m.name.toLowerCase().includes(q)).slice(0,120); document.getElementById('libList').innerHTML=`<p class="mini">Showing ${list.length} of ${MINERALS.length} gemstones • Search to see more</p>`+list.map(m=>`<div style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)"><b>${m.name}</b> <span style="color:var(--gold)">SG ${m.sg_min}-${m.sg_max}</span><br><span class="mini">Hardness ${m.hardness} • ${m.color} • ${m.formula}</span></div>`).join('');}
+function saveResult(){if(!window._lastSG) return alert('Calculate SG first'); let arr=JSON.parse(localStorage.getItem('cd_saved')||'[]'); arr.unshift({sg:window._lastSG.toFixed(2),note:window._lastNote||'',date:new Date().toLocaleString()}); localStorage.setItem('cd_saved',JSON.stringify(arr)); renderSaved(); alert('Saved');}
+function renderSaved(){let arr=JSON.parse(localStorage.getItem('cd_saved')||'[]'); document.getElementById('savedList').innerHTML=arr.length?arr.map(s=>`<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)"><b>SG ${s.sg}</b> • ${s.note} • <span class="mini">${s.date}</span></div>`).join(''):'<p class="mini">No saved results yet.</p>';}
+function clearSaved(){localStorage.removeItem('cd_saved'); renderSaved();}
+function previewImg(e){let f=e.target.files[0]; if(!f) return; let url=URL.createObjectURL(f); document.getElementById('preview').innerHTML=`<img src="${url}" style="width:100%;border-radius:16px;margin-top:12px">`;}
+let CHECKS=["SG matches known gemstone range","Hardness test consistent","Colour and lustre consistent","No bubbles / glassy inclusions","Weight feels correct for size","Seller provides lab certificate / receipt"];
+function renderChecks(){document.getElementById('checks').innerHTML=CHECKS.map(c=>`<label class="check"><input type="checkbox" onchange="scoreCheck()" style="width:auto"> ${c}</label>`).join(''); scoreCheck();}
+function scoreCheck(){let n=document.querySelectorAll('#checks input:checked').length; document.getElementById('checkScore').innerHTML=`<b>Score: ${n} / ${CHECKS.length}</b><br><span class="mini">${n>=5?'Likely Genuine - still confirm with lab':n>=3?'Uncertain - do SG + lab check':'High Risk - do not buy without lab certificate'}</span>`;}
+function shareApp(){let url=location.href; if(navigator.share) navigator.share({title:'Crystal Dive Global',text:'Gemological Standard SG Tester',url}); else {navigator.clipboard.writeText(url); alert('Link copied: '+url);}}
+renderLibrary(); renderChecks(); renderSaved();
+</script>
+
+<script>
+// === MERGED 500+ DATABASE - FROM YOUR gems-database.js, NO EXTERNAL FILE ===
+const ALL_GEMS = [
+{name:"Ruby",ri:1.76,biref:0.008,fluor:"Strong Red",color:"Red / Pink",system:"Trigonal"},
+{name:"Blue Sapphire",ri:1.76,biref:0.008,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"Pink Sapphire",ri:1.76,biref:0.008,fluor:"Strong Red",color:"Red / Pink",system:"Trigonal"},
+{name:"Yellow Sapphire",ri:1.76,biref:0.008,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Padparadscha Sapphire",ri:1.76,biref:0.008,fluor:"Strong Red",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Star Ruby",ri:1.76,biref:0.008,fluor:"Strong Red",color:"Red / Pink",system:"Trigonal"},
+{name:"Star Sapphire",ri:1.76,biref:0.008,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"White Sapphire",ri:1.76,biref:0.008,fluor:"None / Inert",color:"Colourless / White",system:"Trigonal"},
+{name:"Green Sapphire",ri:1.76,biref:0.008,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Purple Sapphire",ri:1.76,biref:0.008,fluor:"Strong Red",color:"Purple",system:"Trigonal"},
+{name:"Emerald",ri:1.58,biref:0.006,fluor:"None / Inert",color:"Green",system:"Hexagonal"},
+{name:"Aquamarine",ri:1.58,biref:0.006,fluor:"None / Inert",color:"Blue",system:"Hexagonal"},
+{name:"Morganite",ri:1.58,biref:0.008,fluor:"None / Inert",color:"Red / Pink",system:"Hexagonal"},
+{name:"Heliodor",ri:1.58,biref:0.006,fluor:"None / Inert",color:"Yellow / Orange",system:"Hexagonal"},
+{name:"Golden Beryl",ri:1.58,biref:0.006,fluor:"None / Inert",color:"Yellow / Orange",system:"Hexagonal"},
+{name:"Goshenite",ri:1.58,biref:0.006,fluor:"None / Inert",color:"Colourless / White",system:"Hexagonal"},
+{name:"Red Beryl",ri:1.58,biref:0.009,fluor:"None / Inert",color:"Red / Pink",system:"Hexagonal"},
+{name:"Bixbite",ri:1.58,biref:0.009,fluor:"None / Inert",color:"Red / Pink",system:"Hexagonal"},
+{name:"Amethyst",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Purple",system:"Trigonal"},
+{name:"Citrine",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Rose Quartz",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Smoky Quartz",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Black / Brown",system:"Trigonal"},
+{name:"Rock Crystal",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Colourless / White",system:"Trigonal"},
+{name:"Prasiolite",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Ametrine",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Purple",system:"Trigonal"},
+{name:"Milky Quartz",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Colourless / White",system:"Trigonal"},
+{name:"Strawberry Quartz",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Rutilated Quartz",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Tourmalinated Quartz",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Black / Brown",system:"Trigonal"},
+{name:"Blue Quartz",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"Chalcedony",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Colourless / White",system:"Trigonal"},
+{name:"Agate",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Colourless / White",system:"Trigonal"},
+{name:"Carnelian",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Onyx",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Black / Brown",system:"Trigonal"},
+{name:"Sardonyx",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Jasper",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Chrysoprase",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Bloodstone",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Tiger Eye",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Hawk Eye",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"Aventurine Quartz",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Almandine Garnet",ri:1.77,biref:0,fluor:"None / Inert",color:"Red / Pink",system:"Cubic"},
+{name:"Pyrope Garnet",ri:1.73,biref:0,fluor:"None / Inert",color:"Red / Pink",system:"Cubic"},
+{name:"Spessartite Garnet",ri:1.80,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Cubic"},
+{name:"Grossular Garnet",ri:1.74,biref:0,fluor:"None / Inert",color:"Green",system:"Cubic"},
+{name:"Andradite Garnet",ri:1.88,biref:0,fluor:"None / Inert",color:"Green",system:"Cubic"},
+{name:"Uvarovite Garnet",ri:1.86,biref:0,fluor:"None / Inert",color:"Green",system:"Cubic"},
+{name:"Tsavorite Garnet",ri:1.74,biref:0,fluor:"None / Inert",color:"Green",system:"Cubic"},
+{name:"Demantoid Garnet",ri:1.88,biref:0,fluor:"None / Inert",color:"Green",system:"Cubic"},
+{name:"Hessonite Garnet",ri:1.74,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Cubic"},
+{name:"Rhodolite Garnet",ri:1.76,biref:0,fluor:"None / Inert",color:"Red / Pink",system:"Cubic"},
+{name:"Malaia Garnet",ri:1.76,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Cubic"},
+{name:"Color Change Garnet",ri:1.76,biref:0,fluor:"None / Inert",color:"Green",system:"Cubic"},
+{name:"Mali Garnet",ri:1.77,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Cubic"},
+{name:"Rubellite Tourmaline",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Indicolite Tourmaline",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"Verdelite Tourmaline",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Schorl Tourmaline",ri:1.63,biref:0.020,fluor:"None / Inert",color:"Black / Brown",system:"Trigonal"},
+{name:"Dravite Tourmaline",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Paraiba Tourmaline",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"Watermelon Tourmaline",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Chrome Tourmaline",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Elbaite Tourmaline",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Liddicoatite Tourmaline",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Moonstone",ri:1.53,biref:0.008,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Labradorite",ri:1.56,biref:0.009,fluor:"None / Inert",color:"Blue",system:"Triclinic"},
+{name:"Sunstone",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Triclinic"},
+{name:"Amazonite",ri:1.53,biref:0.008,fluor:"None / Inert",color:"Green",system:"Triclinic"},
+{name:"Orthoclase",ri:1.52,biref:0.006,fluor:"None / Inert",color:"Yellow / Orange",system:"Monoclinic"},
+{name:"Spectrolite",ri:1.56,biref:0.009,fluor:"None / Inert",color:"Blue",system:"Triclinic"},
+{name:"Oregon Sunstone",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Red / Pink",system:"Triclinic"},
+{name:"Rainbow Moonstone",ri:1.53,biref:0.008,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Topaz",ri:1.62,biref:0.009,fluor:"None / Inert",color:"Colourless / White",system:"Orthorhombic"},
+{name:"Blue Topaz",ri:1.62,biref:0.009,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Pink Topaz",ri:1.62,biref:0.009,fluor:"None / Inert",color:"Red / Pink",system:"Orthorhombic"},
+{name:"Imperial Topaz",ri:1.62,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Orthorhombic"},
+{name:"Zircon",ri:1.93,biref:0.040,fluor:"None / Inert",color:"Blue",system:"Tetragonal"},
+{name:"Blue Zircon",ri:1.93,biref:0.040,fluor:"None / Inert",color:"Blue",system:"Tetragonal"},
+{name:"Red Zircon",ri:1.93,biref:0.040,fluor:"None / Inert",color:"Red / Pink",system:"Tetragonal"},
+{name:"Green Zircon",ri:1.93,biref:0.040,fluor:"None / Inert",color:"Green",system:"Tetragonal"},
+{name:"Spinel",ri:1.72,biref:0,fluor:"Strong Red",color:"Red / Pink",system:"Cubic"},
+{name:"Red Spinel",ri:1.72,biref:0,fluor:"Strong Red",color:"Red / Pink",system:"Cubic"},
+{name:"Blue Spinel",ri:1.72,biref:0,fluor:"None / Inert",color:"Blue",system:"Cubic"},
+{name:"Black Spinel",ri:1.72,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Cubic"},
+{name:"Pink Spinel",ri:1.72,biref:0,fluor:"Strong Red",color:"Red / Pink",system:"Cubic"},
+{name:"Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Colourless / White",system:"Cubic"},
+{name:"Yellow Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Yellow / Orange",system:"Cubic"},
+{name:"Pink Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Red / Pink",system:"Cubic"},
+{name:"Blue Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Blue",system:"Cubic"},
+{name:"Black Diamond",ri:2.42,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Cubic"},
+{name:"Moissanite",ri:2.65,biref:0.043,fluor:"None / Inert",color:"Colourless / White",system:"Hexagonal"},
+{name:"Cubic Zirconia",ri:2.16,biref:0,fluor:"None / Inert",color:"Colourless / White",system:"Cubic"},
+{name:"YAG",ri:1.83,biref:0,fluor:"None / Inert",color:"Colourless / White",system:"Cubic"},
+{name:"GGG",ri:1.98,biref:0,fluor:"None / Inert",color:"Colourless / White",system:"Cubic"},
+{name:"Peridot",ri:1.65,biref:0.036,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Olivine",ri:1.65,biref:0.036,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Apatite",ri:1.63,biref:0.003,fluor:"None / Inert",color:"Blue",system:"Hexagonal"},
+{name:"Green Apatite",ri:1.63,biref:0.003,fluor:"None / Inert",color:"Green",system:"Hexagonal"},
+{name:"Yellow Apatite",ri:1.63,biref:0.003,fluor:"None / Inert",color:"Yellow / Orange",system:"Hexagonal"},
+{name:"Paraiba Apatite",ri:1.63,biref:0.003,fluor:"None / Inert",color:"Blue",system:"Hexagonal"},
+{name:"Tanzanite",ri:1.69,biref:0.009,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Zoisite",ri:1.69,biref:0.009,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Kyanite",ri:1.72,biref:0.016,fluor:"None / Inert",color:"Blue",system:"Triclinic"},
+{name:"Iolite",ri:1.54,biref:0.008,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Cordierite",ri:1.54,biref:0.008,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Andalusite",ri:1.63,biref:0.010,fluor:"None / Inert",color:"Yellow / Orange",system:"Orthorhombic"},
+{name:"Sillimanite",ri:1.65,biref:0.020,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Fibrolite",ri:1.65,biref:0.020,fluor:"None / Inert",color:"Colourless / White",system:"Orthorhombic"},
+{name:"Chrysoberyl",ri:1.74,biref:0.010,fluor:"None / Inert",color:"Yellow / Orange",system:"Orthorhombic"},
+{name:"Alexandrite",ri:1.74,biref:0.010,fluor:"Strong Red",color:"Green",system:"Orthorhombic"},
+{name:"Cat's Eye Chrysoberyl",ri:1.74,biref:0.010,fluor:"None / Inert",color:"Yellow / Orange",system:"Orthorhombic"},
+{name:"Cat's Eye",ri:1.74,biref:0.010,fluor:"None / Inert",color:"Yellow / Orange",system:"Orthorhombic"},
+{name:"Jadeite",ri:1.66,biref:0.010,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Imperial Jade",ri:1.66,biref:0.010,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Lavender Jade",ri:1.66,biref:0.010,fluor:"None / Inert",color:"Purple",system:"Monoclinic"},
+{name:"Nephrite Jade",ri:1.61,biref:0.027,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"White Jade",ri:1.61,biref:0.027,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Black Jade",ri:1.61,biref:0.027,fluor:"None / Inert",color:"Black / Brown",system:"Monoclinic"},
+{name:"Serpentine",ri:1.56,biref:0.008,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Bowenite",ri:1.56,biref:0.008,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"White Opal",ri:1.45,biref:0,fluor:"None / Inert",color:"Colourless / White",system:"Amorphous"},
+{name:"Black Opal",ri:1.45,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Amorphous"},
+{name:"Fire Opal",ri:1.45,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Amorphous"},
+{name:"Boulder Opal",ri:1.45,biref:0,fluor:"None / Inert",color:"Blue",system:"Amorphous"},
+{name:"Crystal Opal",ri:1.45,biref:0,fluor:"None / Inert",color:"Colourless / White",system:"Amorphous"},
+{name:"Ethiopian Opal",ri:1.45,biref:0,fluor:"None / Inert",color:"Colourless / White",system:"Amorphous"},
+{name:"Turquoise",ri:1.61,biref:0.040,fluor:"None / Inert",color:"Blue",system:"Triclinic"},
+{name:"Lapis Lazuli",ri:1.50,biref:0,fluor:"None / Inert",color:"Blue",system:"Cubic"},
+{name:"Malachite",ri:1.85,biref:0.020,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Azurite",ri:1.73,biref:0.110,fluor:"None / Inert",color:"Blue",system:"Monoclinic"},
+{name:"Chrysocolla",ri:1.57,biref:0.020,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Painite",ri:1.80,biref:0.010,fluor:"None / Inert",color:"Red / Pink",system:"Hexagonal"},
+{name:"Benitoite",ri:1.76,biref:0.047,fluor:"Blue",color:"Blue",system:"Hexagonal"},
+{name:"Taaffeite",ri:1.72,biref:0.005,fluor:"None / Inert",color:"Purple",system:"Hexagonal"},
+{name:"Musgravite",ri:1.72,biref:0.005,fluor:"None / Inert",color:"Purple",system:"Trigonal"},
+{name:"Grandidierite",ri:1.59,biref:0.020,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Serendibite",ri:1.70,biref:0.030,fluor:"None / Inert",color:"Blue",system:"Triclinic"},
+{name:"Jeremejevite",ri:1.64,biref:0.010,fluor:"None / Inert",color:"Blue",system:"Hexagonal"},
+{name:"Poudretteite",ri:1.52,biref:0.004,fluor:"None / Inert",color:"Red / Pink",system:"Hexagonal"},
+{name:"Pezzottaite",ri:1.60,biref:0.010,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Zultanite",ri:1.71,biref:0.010,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Diaspore",ri:1.71,biref:0.010,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Clinohumite",ri:1.63,biref:0.030,fluor:"None / Inert",color:"Yellow / Orange",system:"Monoclinic"},
+{name:"Sinhalite",ri:1.67,biref:0.030,fluor:"None / Inert",color:"Yellow / Orange",system:"Orthorhombic"},
+{name:"Danburite",ri:1.63,biref:0.006,fluor:"None / Inert",color:"Yellow / Orange",system:"Orthorhombic"},
+{name:"Euclase",ri:1.65,biref:0.020,fluor:"None / Inert",color:"Blue",system:"Monoclinic"},
+{name:"Scapolite",ri:1.56,biref:0.020,fluor:"Yellow",color:"Yellow / Orange",system:"Tetragonal"},
+{name:"Sphene",ri:1.90,biref:0.130,fluor:"None / Inert",color:"Yellow / Orange",system:"Monoclinic"},
+{name:"Titanite",ri:1.90,biref:0.130,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Sphalerite",ri:2.37,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Cubic"},
+{name:"Cassiterite",ri:2.00,biref:0.100,fluor:"None / Inert",color:"Black / Brown",system:"Tetragonal"},
+{name:"Rutile",ri:2.60,biref:0.290,fluor:"None / Inert",color:"Red / Pink",system:"Tetragonal"},
+{name:"Kornerupine",ri:1.66,biref:0.010,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Axinite",ri:1.68,biref:0.010,fluor:"None / Inert",color:"Yellow / Orange",system:"Triclinic"},
+{name:"Epidote",ri:1.73,biref:0.030,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Vesuvianite",ri:1.72,biref:0.005,fluor:"None / Inert",color:"Green",system:"Tetragonal"},
+{name:"Idocrase",ri:1.72,biref:0.005,fluor:"None / Inert",color:"Green",system:"Tetragonal"},
+{name:"Californite",ri:1.72,biref:0.005,fluor:"None / Inert",color:"Green",system:"Tetragonal"},
+{name:"Diopside",ri:1.67,biref:0.030,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Chrome Diopside",ri:1.67,biref:0.030,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Tremolite",ri:1.61,biref:0.020,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Hiddenite",ri:1.66,biref:0.020,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Kunzite",ri:1.66,biref:0.020,fluor:"None / Inert",color:"Red / Pink",system:"Monoclinic"},
+{name:"Spodumene",ri:1.66,biref:0.020,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Triphane",ri:1.66,biref:0.020,fluor:"None / Inert",color:"Yellow / Orange",system:"Monoclinic"},
+{name:"Fluorite",ri:1.43,biref:0,fluor:"Blue",color:"Purple",system:"Cubic"},
+{name:"Blue Fluorite",ri:1.43,biref:0,fluor:"Blue",color:"Blue",system:"Cubic"},
+{name:"Green Fluorite",ri:1.43,biref:0,fluor:"Blue",color:"Green",system:"Cubic"},
+{name:"Yellow Fluorite",ri:1.43,biref:0,fluor:"Blue",color:"Yellow / Orange",system:"Cubic"},
+{name:"Calcite",ri:1.48,biref:0.172,fluor:"Red",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Blue Calcite",ri:1.48,biref:0.172,fluor:"Red",color:"Blue",system:"Trigonal"},
+{name:"Orange Calcite",ri:1.48,biref:0.172,fluor:"Red",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Selenite",ri:1.52,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Gypsum",ri:1.52,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Aragonite",ri:1.53,biref:0.150,fluor:"None / Inert",color:"Colourless / White",system:"Orthorhombic"},
+{name:"Dolomite",ri:1.50,biref:0.180,fluor:"None / Inert",color:"Colourless / White",system:"Trigonal"},
+{name:"Rhodochrosite",ri:1.60,biref:0.200,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Rhodonite",ri:1.73,biref:0.010,fluor:"None / Inert",color:"Red / Pink",system:"Triclinic"},
+{name:"Smithsonite",ri:1.62,biref:0.030,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Magnesite",ri:1.51,biref:0.200,fluor:"None / Inert",color:"Colourless / White",system:"Trigonal"},
+{name:"Howlite",ri:1.58,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Sodalite",ri:1.48,biref:0,fluor:"None / Inert",color:"Blue",system:"Cubic"},
+{name:"Hackmanite",ri:1.48,biref:0,fluor:"None / Inert",color:"Purple",system:"Cubic"},
+{name:"Haüyne",ri:1.50,biref:0,fluor:"None / Inert",color:"Blue",system:"Cubic"},
+{name:"Cancrinite",ri:1.49,biref:0.020,fluor:"None / Inert",color:"Yellow / Orange",system:"Hexagonal"},
+{name:"Pearl",ri:1.53,biref:0.140,fluor:"None / Inert",color:"Colourless / White",system:"Orthorhombic"},
+{name:"Cultured Pearl",ri:1.53,biref:0.140,fluor:"None / Inert",color:"Colourless / White",system:"Orthorhombic"},
+{name:"Tahitian Pearl",ri:1.53,biref:0.140,fluor:"None / Inert",color:"Black / Brown",system:"Orthorhombic"},
+{name:"South Sea Pearl",ri:1.53,biref:0.140,fluor:"None / Inert",color:"Colourless / White",system:"Orthorhombic"},
+{name:"Coral",ri:1.48,biref:0.020,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Red Coral",ri:1.48,biref:0.020,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Amber",ri:1.54,biref:0,fluor:"Blue",color:"Yellow / Orange",system:"Amorphous"},
+{name:"Baltic Amber",ri:1.54,biref:0,fluor:"Blue",color:"Yellow / Orange",system:"Amorphous"},
+{name:"Jet",ri:1.66,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Amorphous"},
+{name:"Ivory",ri:1.54,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Amorphous"},
+{name:"Shell",ri:1.53,biref:0.140,fluor:"None / Inert",color:"Colourless / White",system:"Orthorhombic"},
+{name:"Abalone Shell",ri:1.53,biref:0.140,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Obsidian",ri:1.48,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Amorphous"},
+{name:"Snowflake Obsidian",ri:1.48,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Amorphous"},
+{name:"Moldavite",ri:1.48,biref:0,fluor:"None / Inert",color:"Green",system:"Amorphous"},
+{name:"Tektite",ri:1.48,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Amorphous"},
+{name:"Libyan Desert Glass",ri:1.46,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Amorphous"},
+{name:"Apache Tear",ri:1.48,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Amorphous"},
+{name:"Lepidolite",ri:1.52,biref:0.020,fluor:"None / Inert",color:"Purple",system:"Monoclinic"},
+{name:"Muscovite",ri:1.56,biref:0.030,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Biotite",ri:1.60,biref:0.040,fluor:"None / Inert",color:"Black / Brown",system:"Monoclinic"},
+{name:"Charoite",ri:1.55,biref:0.010,fluor:"None / Inert",color:"Purple",system:"Monoclinic"},
+{name:"Sugilite",ri:1.61,biref:0,fluor:"None / Inert",color:"Purple",system:"Hexagonal"},
+{name:"Larimar",ri:1.59,biref:0.010,fluor:"None / Inert",color:"Blue",system:"Triclinic"},
+{name:"Pietersite",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"Nuummite",ri:1.60,biref:0.020,fluor:"None / Inert",color:"Black / Brown",system:"Monoclinic"},
+{name:"Septarian",ri:1.50,biref:0.020,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Kyanite Blue",ri:1.72,biref:0.016,fluor:"None / Inert",color:"Blue",system:"Triclinic"},
+{name:"Prehnite",ri:1.61,biref:0.030,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Datolite",ri:1.65,biref:0.040,fluor:"None / Inert",color:"Yellow / Orange",system:"Monoclinic"},
+{name:"Staurolite",ri:1.74,biref:0.010,fluor:"None / Inert",color:"Black / Brown",system:"Orthorhombic"},
+{name:"Chrysanthemum Stone",ri:1.50,biref:0.010,fluor:"None / Inert",color:"Black / Brown",system:"Trigonal"},
+{name:"Pyrite",ri:2.50,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Cubic"},
+{name:"Gold",ri:2.50,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Cubic"},
+{name:"Silver",ri:2.50,biref:0,fluor:"None / Inert",color:"Colourless / White",system:"Cubic"},
+{name:"Copper",ri:2.50,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Cubic"},
+{name:"Hematite",ri:2.90,biref:0.280,fluor:"None / Inert",color:"Black / Brown",system:"Trigonal"},
+{name:"Magnetite",ri:2.42,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Cubic"},
+{name:"Galena",ri:2.50,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Cubic"},
+{name:"Chalcopyrite",ri:2.50,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Tetragonal"},
+{name:"Bornite",ri:2.50,biref:0,fluor:"None / Inert",color:"Purple",system:"Cubic"},
+{name:"Bismuth",ri:2.50,biref:0,fluor:"None / Inert",color:"Colourless / White",system:"Trigonal"},
+{name:"Covellite",ri:2.50,biref:0,fluor:"None / Inert",color:"Blue",system:"Hexagonal"},
+{name:"Molybdenite",ri:2.50,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Hexagonal"},
+{name:"Stibnite",ri:3.50,biref:0.500,fluor:"None / Inert",color:"Black / Brown",system:"Orthorhombic"},
+{name:"Marcasite",ri:2.50,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Orthorhombic"},
+{name:"Ilmenite",ri:2.50,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Trigonal"},
+{name:"Chromite",ri:2.00,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Cubic"},
+{name:"Goethite",ri:2.30,biref:0.100,fluor:"None / Inert",color:"Yellow / Orange",system:"Orthorhombic"},
+{name:"Limonite",ri:2.30,biref:0.100,fluor:"None / Inert",color:"Yellow / Orange",system:"Amorphous"},
+{name:"Cuprite",ri:2.85,biref:0,fluor:"None / Inert",color:"Red / Pink",system:"Cubic"},
+{name:"Azurite Malachite",ri:1.85,biref:0.020,fluor:"None / Inert",color:"Blue",system:"Monoclinic"},
+{name:"Turquoise Matrix",ri:1.61,biref:0.040,fluor:"None / Inert",color:"Blue",system:"Triclinic"},
+{name:"Iron Meteorite",ri:2.50,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Cubic"},
+{name:"Stony Meteorite",ri:1.60,biref:0.010,fluor:"None / Inert",color:"Black / Brown",system:"Orthorhombic"},
+{name:"Pallasite Meteorite",ri:1.65,biref:0.036,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Chondrite Meteorite",ri:1.60,biref:0.010,fluor:"None / Inert",color:"Black / Brown",system:"Orthorhombic"},
+{name:"Achondrite Meteorite",ri:1.60,biref:0.010,fluor:"None / Inert",color:"Black / Brown",system:"Orthorhombic"},
+{name:"Carbonaceous Chondrite",ri:1.60,biref:0.010,fluor:"None / Inert",color:"Black / Brown",system:"Orthorhombic"},
+{name:"Tunguska Meteorite",ri:1.60,biref:0.010,fluor:"None / Inert",color:"Black / Brown",system:"Orthorhombic"},
+{name:"Chrome Tourmaline Green",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Blue Tourmaline",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"Green Tourmaline",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Pink Tourmaline",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Yellow Tourmaline",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Black Tourmaline",ri:1.63,biref:0.020,fluor:"None / Inert",color:"Black / Brown",system:"Trigonal"},
+{name:"Cat's Eye Tourmaline",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Red Garnet",ri:1.77,biref:0,fluor:"None / Inert",color:"Red / Pink",system:"Cubic"},
+{name:"Green Garnet",ri:1.74,biref:0,fluor:"None / Inert",color:"Green",system:"Cubic"},
+{name:"Orange Garnet",ri:1.80,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Cubic"},
+{name:"Yellow Garnet",ri:1.80,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Cubic"},
+{name:"Purple Garnet",ri:1.76,biref:0,fluor:"None / Inert",color:"Purple",system:"Cubic"},
+{name:"Pink Garnet",ri:1.76,biref:0,fluor:"None / Inert",color:"Red / Pink",system:"Cubic"},
+{name:"Star Garnet",ri:1.77,biref:0,fluor:"None / Inert",color:"Red / Pink",system:"Cubic"},
+{name:"Blue Garnet",ri:1.76,biref:0,fluor:"None / Inert",color:"Blue",system:"Cubic"},
+{name:"Carnelian Agate",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Moss Agate",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Fire Agate",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Dendritic Agate",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Colourless / White",system:"Trigonal"},
+{name:"Blue Lace Agate",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"Crazy Lace Agate",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Colourless / White",system:"Trigonal"},
+{name:"Botswana Agate",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Purple",system:"Trigonal"},
+{name:"Tree Agate",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Green Jasper",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Red Jasper",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Yellow Jasper",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Picture Jasper",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Ocean Jasper",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Dalmatian Jasper",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Colourless / White",system:"Trigonal"},
+{name:"Brecciated Jasper",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Unakite",ri:1.55,biref:0.010,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Epidote Unakite",ri:1.55,biref:0.010,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Zebra Jasper",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Black / Brown",system:"Trigonal"},
+{name:"Kambaba Jasper",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Leopard Jasper",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Bumblebee Jasper",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Mookaite Jasper",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Petrified Wood",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Amber Baltic",ri:1.54,biref:0,fluor:"Blue",color:"Yellow / Orange",system:"Amorphous"},
+{name:"Copal",ri:1.54,biref:0,fluor:"Blue",color:"Yellow / Orange",system:"Amorphous"},
+{name:"Blue Amber",ri:1.54,biref:0,fluor:"Blue",color:"Blue",system:"Amorphous"},
+{name:"Green Amber",ri:1.54,biref:0,fluor:"Blue",color:"Green",system:"Amorphous"},
+{name:"Black Amber",ri:1.54,biref:0,fluor:"Blue",color:"Black / Brown",system:"Amorphous"},
+{name:"White Amber",ri:1.54,biref:0,fluor:"Blue",color:"Colourless / White",system:"Amorphous"},
+{name:"Fluorite Purple",ri:1.43,biref:0,fluor:"Blue",color:"Purple",system:"Cubic"},
+{name:"Fluorite Blue",ri:1.43,biref:0,fluor:"Blue",color:"Blue",system:"Cubic"},
+{name:"Fluorite Green",ri:1.43,biref:0,fluor:"Blue",color:"Green",system:"Cubic"},
+{name:"Fluorite Yellow",ri:1.43,biref:0,fluor:"Blue",color:"Yellow / Orange",system:"Cubic"},
+{name:"Fluorite Pink",ri:1.43,biref:0,fluor:"Blue",color:"Red / Pink",system:"Cubic"},
+{name:"Ametrine Bolivian",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Purple",system:"Trigonal"},
+{name:"Citrine Madeira",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Amethyst Vera Cruz",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Purple",system:"Trigonal"},
+{name:"Cacoxenite Amethyst",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Purple",system:"Trigonal"},
+{name:"Chevron Amethyst",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Purple",system:"Trigonal"},
+{name:"Super Seven",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Purple",system:"Trigonal"},
+{name:"Lemurian Quartz",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Colourless / White",system:"Trigonal"},
+{name:"Herkimer Diamond",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Colourless / White",system:"Trigonal"},
+{name:"Phantom Quartz",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Chlorite Quartz",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Golden Rutile Quartz",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Black Rutile Quartz",ri:1.54,biref:0.009,fluor:"None / Inert",color:"Black / Brown",system:"Trigonal"},
+{name:"Aquamarine Santa Maria",ri:1.58,biref:0.006,fluor:"None / Inert",color:"Blue",system:"Hexagonal"},
+{name:"Aquamarine Maxixe",ri:1.58,biref:0.006,fluor:"None / Inert",color:"Blue",system:"Hexagonal"},
+{name:"Emerald Colombian",ri:1.58,biref:0.006,fluor:"None / Inert",color:"Green",system:"Hexagonal"},
+{name:"Emerald Zambian",ri:1.58,biref:0.006,fluor:"None / Inert",color:"Green",system:"Hexagonal"},
+{name:"Emerald Brazilian",ri:1.58,biref:0.006,fluor:"None / Inert",color:"Green",system:"Hexagonal"},
+{name:"Trapiche Emerald",ri:1.58,biref:0.006,fluor:"None / Inert",color:"Green",system:"Hexagonal"},
+{name:"Trapiche Ruby",ri:1.76,biref:0.008,fluor:"Strong Red",color:"Red / Pink",system:"Trigonal"},
+{name:"Trapiche Sapphire",ri:1.76,biref:0.008,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"Montana Sapphire",ri:1.76,biref:0.008,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"Kashmir Sapphire",ri:1.76,biref:0.008,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"Burmese Ruby",ri:1.76,biref:0.008,fluor:"Strong Red",color:"Red / Pink",system:"Trigonal"},
+{name:"Thai Ruby",ri:1.76,biref:0.008,fluor:"Strong Red",color:"Red / Pink",system:"Trigonal"},
+{name:"African Ruby",ri:1.76,biref:0.008,fluor:"Strong Red",color:"Red / Pink",system:"Trigonal"},
+{name:"Ceylon Sapphire",ri:1.76,biref:0.008,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"Australian Sapphire",ri:1.76,biref:0.008,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"Madagascar Sapphire",ri:1.76,biref:0.008,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"Padparadscha Sri Lanka",ri:1.76,biref:0.008,fluor:"Strong Red",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Champagne Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Yellow / Orange",system:"Cubic"},
+{name:"Cognac Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Yellow / Orange",system:"Cubic"},
+{name:"Canary Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Yellow / Orange",system:"Cubic"},
+{name:"Green Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Green",system:"Cubic"},
+{name:"Red Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Red / Pink",system:"Cubic"},
+{name:"Purple Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Purple",system:"Cubic"},
+{name:"Orange Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Yellow / Orange",system:"Cubic"},
+{name:"Brown Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Black / Brown",system:"Cubic"},
+{name:"Grey Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Black / Brown",system:"Cubic"},
+{name:"White Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Colourless / White",system:"Cubic"},
+{name:"Salt Pepper Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Black / Brown",system:"Cubic"},
+{name:"Rose Cut Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Colourless / White",system:"Cubic"},
+{name:"Lab Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Colourless / White",system:"Cubic"},
+{name:"HPHT Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Colourless / White",system:"Cubic"},
+{name:"CVD Diamond",ri:2.42,biref:0,fluor:"Blue",color:"Colourless / White",system:"Cubic"},
+{name:"Alexandrite Russian",ri:1.74,biref:0.010,fluor:"Strong Red",color:"Green",system:"Orthorhombic"},
+{name:"Alexandrite Brazilian",ri:1.74,biref:0.010,fluor:"Strong Red",color:"Green",system:"Orthorhombic"},
+{name:"Cat's Eye Alexandrite",ri:1.74,biref:0.010,fluor:"Strong Red",color:"Green",system:"Orthorhombic"},
+{name:"Tanzanite AAA",ri:1.69,biref:0.009,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Tanzanite Violet",ri:1.69,biref:0.009,fluor:"None / Inert",color:"Purple",system:"Orthorhombic"},
+{name:"Green Tanzanite",ri:1.69,biref:0.009,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Chrome Tanzanite",ri:1.69,biref:0.009,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Zoisite Green",ri:1.69,biref:0.009,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Thulite",ri:1.69,biref:0.009,fluor:"None / Inert",color:"Red / Pink",system:"Orthorhombic"},
+{name:"Anyolite",ri:1.69,biref:0.009,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Kyanite Green",ri:1.72,biref:0.016,fluor:"None / Inert",color:"Green",system:"Triclinic"},
+{name:"Kyanite Orange",ri:1.72,biref:0.016,fluor:"None / Inert",color:"Yellow / Orange",system:"Triclinic"},
+{name:"Iolite Sunstone",ri:1.54,biref:0.008,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Bloodshot Iolite",ri:1.54,biref:0.008,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Andalusite Green",ri:1.63,biref:0.010,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Andalusite Brown",ri:1.63,biref:0.010,fluor:"None / Inert",color:"Black / Brown",system:"Orthorhombic"},
+{name:"Chiastolite",ri:1.63,biref:0.010,fluor:"None / Inert",color:"Black / Brown",system:"Orthorhombic"},
+{name:"Sillimanite Fibrolite",ri:1.65,biref:0.020,fluor:"None / Inert",color:"Colourless / White",system:"Orthorhombic"},
+{name:"Mullite",ri:1.65,biref:0.020,fluor:"None / Inert",color:"Colourless / White",system:"Orthorhombic"},
+{name:"Kornerupine Green",ri:1.66,biref:0.010,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Prismatine",ri:1.66,biref:0.010,fluor:"None / Inert",color:"Yellow / Orange",system:"Orthorhombic"},
+{name:"Enstatite",ri:1.65,biref:0.010,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Hypersthene",ri:1.68,biref:0.020,fluor:"None / Inert",color:"Black / Brown",system:"Orthorhombic"},
+{name:"Bronzite",ri:1.68,biref:0.020,fluor:"None / Inert",color:"Yellow / Orange",system:"Orthorhombic"},
+{name:"Ferrosilite",ri:1.68,biref:0.020,fluor:"None / Inert",color:"Black / Brown",system:"Orthorhombic"},
+{name:"Diopside Black Star",ri:1.67,biref:0.030,fluor:"None / Inert",color:"Black / Brown",system:"Monoclinic"},
+{name:"Diopside Green",ri:1.67,biref:0.030,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Tashmarine Diopside",ri:1.67,biref:0.030,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Violane",ri:1.67,biref:0.030,fluor:"None / Inert",color:"Purple",system:"Monoclinic"},
+{name:"Jadeite Blue",ri:1.66,biref:0.010,fluor:"None / Inert",color:"Blue",system:"Monoclinic"},
+{name:"Jadeite Red",ri:1.66,biref:0.010,fluor:"None / Inert",color:"Red / Pink",system:"Monoclinic"},
+{name:"Jadeite Yellow",ri:1.66,biref:0.010,fluor:"None / Inert",color:"Yellow / Orange",system:"Monoclinic"},
+{name:"Jadeite Black",ri:1.66,biref:0.010,fluor:"None / Inert",color:"Black / Brown",system:"Monoclinic"},
+{name:"Jadeite White",ri:1.66,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Nephrite Yellow",ri:1.61,biref:0.027,fluor:"None / Inert",color:"Yellow / Orange",system:"Monoclinic"},
+{name:"Nephrite White Mutton Fat",ri:1.61,biref:0.027,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Nephrite Spinach",ri:1.61,biref:0.027,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Serpentine Yellow",ri:1.56,biref:0.008,fluor:"None / Inert",color:"Yellow / Orange",system:"Monoclinic"},
+{name:"Serpentine Black",ri:1.56,biref:0.008,fluor:"None / Inert",color:"Black / Brown",system:"Monoclinic"},
+{name:"Lizardite",ri:1.56,biref:0.008,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Antigorite",ri:1.56,biref:0.008,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Williamsite",ri:1.56,biref:0.008,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Chrysotile",ri:1.56,biref:0.008,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Opal White",ri:1.45,biref:0,fluor:"None / Inert",color:"Colourless / White",system:"Amorphous"},
+{name:"Opal Black",ri:1.45,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Amorphous"},
+{name:"Opal Fire",ri:1.45,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Amorphous"},
+{name:"Opal Pink",ri:1.45,biref:0,fluor:"None / Inert",color:"Red / Pink",system:"Amorphous"},
+{name:"Opal Blue",ri:1.45,biref:0,fluor:"None / Inert",color:"Blue",system:"Amorphous"},
+{name:"Opal Green",ri:1.45,biref:0,fluor:"None / Inert",color:"Green",system:"Amorphous"},
+{name:"Opal Yellow",ri:1.45,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Amorphous"},
+{name:"Opal Purple",ri:1.45,biref:0,fluor:"None / Inert",color:"Purple",system:"Amorphous"},
+{name:"Opal Matrix",ri:1.45,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Amorphous"},
+{name:"Opal Doublet",ri:1.45,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Amorphous"},
+{name:"Opal Triplet",ri:1.45,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Amorphous"},
+{name:"Andamooka Opal",ri:1.45,biref:0,fluor:"None / Inert",color:"Colourless / White",system:"Amorphous"},
+{name:"Coober Pedy Opal",ri:1.45,biref:0,fluor:"None / Inert",color:"Colourless / White",system:"Amorphous"},
+{name:"Lightning Ridge Opal",ri:1.45,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Amorphous"},
+{name:"Turquoise Blue",ri:1.61,biref:0.040,fluor:"None / Inert",color:"Blue",system:"Triclinic"},
+{name:"Turquoise Green",ri:1.61,biref:0.040,fluor:"None / Inert",color:"Green",system:"Triclinic"},
+{name:"Turquoise Sleeping Beauty",ri:1.61,biref:0.040,fluor:"None / Inert",color:"Blue",system:"Triclinic"},
+{name:"Turquoise Kingman",ri:1.61,biref:0.040,fluor:"None / Inert",color:"Blue",system:"Triclinic"},
+{name:"Turquoise Persian",ri:1.61,biref:0.040,fluor:"None / Inert",color:"Blue",system:"Triclinic"},
+{name:"Lapis Lazuli Afghan",ri:1.50,biref:0,fluor:"None / Inert",color:"Blue",system:"Cubic"},
+{name:"Sodalite Blue",ri:1.48,biref:0,fluor:"None / Inert",color:"Blue",system:"Cubic"},
+{name:"Sodalite Pink",ri:1.48,biref:0,fluor:"None / Inert",color:"Red / Pink",system:"Cubic"},
+{name:"Malachite Botryoidal",ri:1.85,biref:0.020,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Malachite Azurite",ri:1.85,biref:0.020,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Azurite Blue",ri:1.73,biref:0.110,fluor:"None / Inert",color:"Blue",system:"Monoclinic"},
+{name:"Azurite Green",ri:1.73,biref:0.110,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Chrysocolla Blue",ri:1.57,biref:0.020,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Chrysocolla Green",ri:1.57,biref:0.020,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Chrysocolla Eilat Stone",ri:1.57,biref:0.020,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Eilat Stone",ri:1.57,biref:0.020,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Dioptase",ri:1.65,biref:0.050,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Variscite",ri:1.56,biref:0.030,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Wavellite",ri:1.52,biref:0.020,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Adamite",ri:1.72,biref:0.040,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Conichalcite",ri:1.78,biref:0.030,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Olivenite",ri:1.78,biref:0.030,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Libethenite",ri:1.78,biref:0.030,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Pseudomalachite",ri:1.85,biref:0.020,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Atacamite",ri:1.83,biref:0.040,fluor:"None / Inert",color:"Green",system:"Orthorhombic"},
+{name:"Brochantite",ri:1.83,biref:0.040,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Linarite",ri:1.80,biref:0.060,fluor:"None / Inert",color:"Blue",system:"Monoclinic"},
+{name:"Aurichalcite",ri:1.80,biref:0.060,fluor:"None / Inert",color:"Blue",system:"Monoclinic"},
+{name:"Roselite",ri:1.70,biref:0.020,fluor:"None / Inert",color:"Red / Pink",system:"Monoclinic"},
+{name:"Erythrite",ri:1.70,biref:0.020,fluor:"None / Inert",color:"Red / Pink",system:"Monoclinic"},
+{name:"Annabergite",ri:1.70,biref:0.020,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Vivianite",ri:1.60,biref:0.060,fluor:"None / Inert",color:"Blue",system:"Monoclinic"},
+{name:"Ludlamite",ri:1.60,biref:0.060,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Strengite",ri:1.70,biref:0.040,fluor:"None / Inert",color:"Purple",system:"Orthorhombic"},
+{name:"Phosphosiderite",ri:1.70,biref:0.040,fluor:"None / Inert",color:"Purple",system:"Monoclinic"},
+{name:"Turquoise Chrysocolla",ri:1.61,biref:0.040,fluor:"None / Inert",color:"Blue",system:"Triclinic"},
+{name:"Apophyllite",ri:1.53,biref:0.010,fluor:"None / Inert",color:"Green",system:"Tetragonal"},
+{name:"Stilbite",ri:1.50,biref:0.010,fluor:"None / Inert",color:"Red / Pink",system:"Monoclinic"},
+{name:"Heulandite",ri:1.50,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Natrolite",ri:1.48,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Orthorhombic"},
+{name:"Scolecite",ri:1.50,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Mesolite",ri:1.50,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Orthorhombic"},
+{name:"Thomsonite",ri:1.53,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Orthorhombic"},
+{name:"Chabazite",ri:1.48,biref:0.010,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Analcime",ri:1.48,biref:0,fluor:"None / Inert",color:"Colourless / White",system:"Cubic"},
+{name:"Sodalite Hackmanite",ri:1.48,biref:0,fluor:"None / Inert",color:"Purple",system:"Cubic"},
+{name:"Ussingite",ri:1.50,biref:0.010,fluor:"None / Inert",color:"Purple",system:"Triclinic"},
+{name:"Villiaumite",ri:1.48,biref:0,fluor:"None / Inert",color:"Red / Pink",system:"Cubic"},
+{name:"Natron",ri:1.50,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Searlesite",ri:1.50,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Borax",ri:1.47,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Colemanite",ri:1.58,biref:0.040,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Ulexite",ri:1.50,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Triclinic"},
+{name:"Kernite",ri:1.47,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Sassolite",ri:1.46,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Triclinic"},
+{name:"Howlite White",ri:1.58,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Magnesite White",ri:1.51,biref:0.200,fluor:"None / Inert",color:"Colourless / White",system:"Trigonal"},
+{name:"Magnesite Yellow",ri:1.51,biref:0.200,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Calcite Blue",ri:1.48,biref:0.172,fluor:"Red",color:"Blue",system:"Trigonal"},
+{name:"Calcite Green",ri:1.48,biref:0.172,fluor:"Red",color:"Green",system:"Trigonal"},
+{name:"Calcite Pink",ri:1.48,biref:0.172,fluor:"Red",color:"Red / Pink",system:"Trigonal"},
+{name:"Calcite Red",ri:1.48,biref:0.172,fluor:"Red",color:"Red / Pink",system:"Trigonal"},
+{name:"Calcite Honey",ri:1.48,biref:0.172,fluor:"Red",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Calcite Optical",ri:1.48,biref:0.172,fluor:"Red",color:"Colourless / White",system:"Trigonal"},
+{name:"Aragonite Blue",ri:1.53,biref:0.150,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Aragonite Brown",ri:1.53,biref:0.150,fluor:"None / Inert",color:"Black / Brown",system:"Orthorhombic"},
+{name:"Aragonite White",ri:1.53,biref:0.150,fluor:"None / Inert",color:"Colourless / White",system:"Orthorhombic"},
+{name:"Dolomite Pink",ri:1.50,biref:0.180,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Dolomite Blue",ri:1.50,biref:0.180,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"Ankerite",ri:1.51,biref:0.180,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Siderite",ri:1.60,biref:0.200,fluor:"None / Inert",color:"Black / Brown",system:"Trigonal"},
+{name:"Rhodochrosite Pink",ri:1.60,biref:0.200,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Rhodochrosite Red",ri:1.60,biref:0.200,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Rhodonite Pink",ri:1.73,biref:0.010,fluor:"None / Inert",color:"Red / Pink",system:"Triclinic"},
+{name:"Rhodonite Black",ri:1.73,biref:0.010,fluor:"None / Inert",color:"Black / Brown",system:"Triclinic"},
+{name:"Bustamite",ri:1.73,biref:0.010,fluor:"None / Inert",color:"Red / Pink",system:"Triclinic"},
+{name:"Inesite",ri:1.70,biref:0.010,fluor:"None / Inert",color:"Red / Pink",system:"Triclinic"},
+{name:"Smithsonite Blue",ri:1.62,biref:0.030,fluor:"None / Inert",color:"Blue",system:"Trigonal"},
+{name:"Smithsonite Green",ri:1.62,biref:0.030,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Smithsonite Pink",ri:1.62,biref:0.030,fluor:"None / Inert",color:"Red / Pink",system:"Trigonal"},
+{name:"Smithsonite Yellow",ri:1.62,biref:0.030,fluor:"None / Inert",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Hemimorphite",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Hemimorphite Blue",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Willemite",ri:1.69,biref:0.030,fluor:"Green",color:"Green",system:"Trigonal"},
+{name:"Willemite Green",ri:1.69,biref:0.030,fluor:"Green",color:"Green",system:"Trigonal"},
+{name:"Troostite",ri:1.69,biref:0.030,fluor:"Green",color:"Yellow / Orange",system:"Trigonal"},
+{name:"Hardystonite",ri:1.67,biref:0.010,fluor:"Blue",color:"Colourless / White",system:"Tetragonal"},
+{name:"Clinohedrite",ri:1.67,biref:0.010,fluor:"None / Inert",color:"Colourless / White",system:"Monoclinic"},
+{name:"Calamine",ri:1.62,biref:0.020,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Aurichalcite Blue",ri:1.80,biref:0.060,fluor:"None / Inert",color:"Blue",system:"Monoclinic"},
+{name:"Rosazite",ri:1.80,biref:0.060,fluor:"None / Inert",color:"Blue",system:"Monoclinic"},
+{name:"Malachite Green",ri:1.85,biref:0.020,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Azurite Blue",ri:1.73,biref:0.110,fluor:"None / Inert",color:"Blue",system:"Monoclinic"},
+{name:"Chrysocolla Blue Green",ri:1.57,biref:0.020,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Dioptase Emerald Green",ri:1.65,biref:0.050,fluor:"None / Inert",color:"Green",system:"Trigonal"},
+{name:"Epidote Green",ri:1.73,biref:0.030,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Epidote Yellow",ri:1.73,biref:0.030,fluor:"None / Inert",color:"Yellow / Orange",system:"Monoclinic"},
+{name:"Clinozoisite",ri:1.72,biref:0.010,fluor:"None / Inert",color:"Green",system:"Monoclinic"},
+{name:"Piemontite",ri:1.73,biref:0.030,fluor:"None / Inert",color:"Red / Pink",system:"Monoclinic"},
+{name:"Allanite",ri:1.75,biref:0.020,fluor:"None / Inert",color:"Black / Brown",system:"Monoclinic"},
+{name:"Zoisite Blue",ri:1.69,biref:0.009,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Zoisite Pink",ri:1.69,biref:0.009,fluor:"None / Inert",color:"Red / Pink",system:"Orthorhombic"},
+{name:"Tanzanite Blue Violet",ri:1.69,biref:0.009,fluor:"None / Inert",color:"Blue",system:"Orthorhombic"},
+{name:"Vesuvianite Green",ri:1.72,biref:0.005,fluor:"None / Inert",color:"Green",system:"Tetragonal"},
+{name:"Vesuvianite Yellow",ri:1.72,biref:0.005,fluor:"None / Inert",color:"Yellow / Orange",system:"Tetragonal"},
+{name:"Vesuvianite Brown",ri:1.72,biref:0.005,fluor:"None / Inert",color:"Black / Brown",system:"Tetragonal"},
+{name:"Vesuvianite Blue",ri:1.72,biref:0.005,fluor:"None / Inert",color:"Blue",system:"Tetragonal"},
+{name:"Grossular White",ri:1.74,biref:0,fluor:"None / Inert",color:"Colourless / White",system:"Cubic"},
+{name:"Grossular Orange",ri:1.74,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Cubic"},
+{name:"Grossular Pink",ri:1.74,biref:0,fluor:"None / Inert",color:"Red / Pink",system:"Cubic"},
+{name:"Hydrogrossular",ri:1.74,biref:0,fluor:"None / Inert",color:"Green",system:"Cubic"},
+{name:"Katoite",ri:1.74,biref:0,fluor:"None / Inert",color:"Colourless / White",system:"Cubic"},
+{name:"Andradite Yellow",ri:1.88,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Cubic"},
+{name:"Andradite Brown",ri:1.88,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Cubic"},
+{name:"Andradite Black",ri:1.88,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Cubic"},
+{name:"Melanite",ri:1.88,biref:0,fluor:"None / Inert",color:"Black / Brown",system:"Cubic"},
+{name:"Topazolite",ri:1.88,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Cubic"},
+{name:"Almandine Red",ri:1.77,biref:0,fluor:"None / Inert",color:"Red / Pink",system:"Cubic"},
+{name:"Pyrope Red",ri:1.73,biref:0,fluor:"None / Inert",color:"Red / Pink",system:"Cubic"},
+{name:"Spessartite Orange",ri:1.80,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Cubic"},
+{name:"Spessartite Red",ri:1.80,biref:0,fluor:"None / Inert",color:"Red / Pink",system:"Cubic"},
+{name:"Uvarovite Green",ri:1.86,biref:0,fluor:"None / Inert",color:"Green",system:"Cubic"},
+{name:"Tsavorite Green",ri:1.74,biref:0,fluor:"None / Inert",color:"Green",system:"Cubic"},
+{name:"Demantoid Green",ri:1.88,biref:0,fluor:"None / Inert",color:"Green",system:"Cubic"},
+{name:"Hessonite Orange",ri:1.74,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Cubic"},
+{name:"Rhodolite Pink",ri:1.76,biref:0,fluor:"None / Inert",color:"Red / Pink",system:"Cubic"},
+{name:"Malaia Pink",ri:1.76,biref:0,fluor:"None / Inert",color:"Red / Pink",system:"Cubic"},
+{name:"Color Change Garnet Blue Green",ri:1.76,biref:0,fluor:"None / Inert",color:"Green",system:"Cubic"},
+{name:"Mali Garnet Yellow",ri:1.77,biref:0,fluor:"None / Inert",color:"Yellow / Orange",system:"Cubic"},
+{name:"Mali Garnet Green",ri:1.77,biref:0,fluor:"None / Inert",color:"Green",system:"Cubic"},
+{name:"Umbalite Garnet",ri:1.76,biref:0,fluor:"None / Inert",color:"Purple",system:"Cubic"},
+{name:"Grape Garnet",ri:1.76,biref:0,fluor:"None / Inert",color:"Purple",system:"Cubic"}
+];
+const CD_GEMS = [...new Map(ALL_GEMS.map(g => [g.name.toLowerCase().trim(), g])).values()];
+
+function cdIdentify(){
+ const ri = parseFloat(document.getElementById('cd-ri').value);
+ const biref = parseFloat(document.getElementById('cd-biref').value);
+ const fluor = document.getElementById('cd-fluor').value;
+ const color = document.getElementById('cd-color').value;
+ const system = document.getElementById('cd-system').value;
+ let scored = CD_GEMS.map(function(g){
+  let score = 0;
+  if(!isNaN(ri)) score += Math.max(0, 40 - Math.abs(g.ri - ri)*200);
+  if(!isNaN(biref)) score += Math.max(0, 25 - Math.abs((g.biref||0) - biref)*500);
+  if(fluor && (g.fluor||"").toLowerCase().includes(fluor.toLowerCase())) score += 15;
+  if(color && (g.color||"").toLowerCase().includes(color.toLowerCase())) score += 10;
+  if(system && system.toLowerCase().includes((g.system||"").toLowerCase())) score += 10;
+  return {name:g.name, ri:g.ri, score:Math.round(score)};
+ });
+ scored.sort(function(a,b){ return b.score - a.score; });
+ scored = scored.slice(0,3);
+ let html = "";
+ for(let i=0;i<scored.length;i++){ html += "<div style='background:#1e293b;padding:12px;border-radius:10px;margin-top:8px'><b>#"+(i+1)+" "+scored[i].name+" - "+scored[i].score+"% Match</b><br><span style='font-size:12px;opacity:.8'>RI "+scored[i].ri+"</span></div>"; }
+ document.getElementById('cd-results').innerHTML = html;
+}
+</script>
+</body>
+</html>
