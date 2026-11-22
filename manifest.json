@@ -1,18 +1,33 @@
+
 {
-  "background_color": "#0a0a0a",
-  "dir": "ltr",
-  "display": "standalone",
   "name": "Crystal Dive - Gem Identifier",
-  "orientation": "portrait",
-  "scope": "/crystal-dive-global/",
   "short_name": "Crystal Dive",
-  "start_url": "/https://crystaldive-global.github.io/crystal-dive-global/app-new.html",
-  "theme_color": "#00d4ff",
-  "id": "https://crystaldive-global.github.io/crystal-dive-global/app-new.html",
-  "description": "CRYSTAL DIVE — Where Science Meets Luxury.\n\nDiscover the hidden world inside every stone. Crystal Dive combines advanced AI with mineralogical and gemological science to identify gems, crystals and minerals instantly from a photo.\n\nFor collectors, jewellers, healers and lovers of natural beauty.\n\nWHAT YOU GET:\n• Instant AI Identification - Name, variety, and mineral family\n• Gemological Profile - Hardness, lustre, clarity, cut and origin\n• Rarity &amp; Value Insight - Market value range and collector grade\n• Care &amp; Authenticity - How to clean, store and verify real vs synthetic\n• Crystal Collection - Save, organise and build your private vault\n\nFrom diamond to amethyst, from emerald to rare tourmaline — Crystal Dive reveals the story, science and soul of every stone.\n\nOwn the science. Wear the luxury. Dive deeper.",
-  "lang": "en",
-  "display_override": [
-    "standalone",
-    "window-controls-overlay"
+  "description": "Identify gems and minerals with Crystal Dive - scan, identify and learn about precious stones.",
+  "id": "/crystal-dive-global/app-new.html",
+  "start_url": "/crystal-dive-global/app-new.html",
+  "scope": "/crystal-dive-global/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/crystal-dive-global/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/crystal-dive-global/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/crystal-dive-global/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }
